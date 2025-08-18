@@ -1,53 +1,111 @@
-:root{
-    --red: rgb(175, 37, 37);
-    --grey1:rgb(248, 248, 248);
+:root {
+  --red: rgb(175, 37, 37);
+  --grey1: rgb(248, 248, 248);
+  --grey2: rgb(160, 156, 156);
 }
-*{
-      margin: 0px;
+* {
+  margin: 0px;
   padding: 0px;
   font-family: "Fredoka", sans-serif;
 }
-.page{
-    background-color: yellow;
-    width: 450px;
-    height: 600px;
-    margin: 0px auto ;
-    padding: 40px 20px;
+.page {
+  width: 450px;
+  margin: 0px auto;
+  padding: 40px 20px;
 }
-.form{
-    display: flex;
-    flex-direction: column;
+.form {
+  display: flex;
+  flex-direction: column;
 }
-.heading{
-    background-color: orange;
-    width: 230px;
-    margin: 0px auto;
-    text-align: center;
+.heading {
+  margin: 22px auto;
+  text-align: center;
+}
+.heading h1 {
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.heading p{
+    color: var(--grey2);
     margin-bottom: 32px;
 }
-.text{
-    margin-bottom: 8px;
-    font-size: 18px;
-    font-weight: 500;
+.text {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 500;
 }
-.input{
-    height: 40px;
-    border-radius: 5px;
-    border: none;
-    padding: 0px 16px;
-    background-color: var(--grey1);
-    
-    font-size: 16px;
+.input {
+  height: 48px;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 16px;
+  background-color: var(--grey1);
+  font-size: 16px;
 }
-.pass-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--grey1);
-    margin-bottom: 16px;
-    border-radius: 5px;
-    
+.email {
+  margin-bottom: 16px;
 }
-.pass-container img{
-    margin-left: 16px;
+.pass-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--grey1);
+
+  border-radius: 5px;
+}
+.pass-container img {
+  margin-right: 16px;
+  width: 20px;
+}
+.forget-password-container {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 8px;
+  margin-bottom: 48px;
+}
+.submit-btn {
+  height: 48px;
+  border-radius: 500px;
+  border: none;
+  background-color: green;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
+.sign-option-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: var(--grey2);
+  gap: 10px;
+  margin: 48px auto;
+}
+.line {
+  border: 1px solid rgb(231, 227, 227);
+  width: 80px;
+}
+.sign-apps-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.sign-apps-container button {
+  border: 2px solid rgb(225, 225, 225);
+  width: 60px;
+  height: 60px;
+  border-radius: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+.last-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.last-container p {
+  color: var(--grey2);
 }
