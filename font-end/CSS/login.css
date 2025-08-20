@@ -17,18 +17,12 @@
   display: flex;
   flex-direction: column;
 }
-.heading {
-  margin: 22px auto;
-  text-align: center;
+.heading-container {
+ background:linear-gradient();
+ height: 60px;
+ border-radius: 12px;
 }
-.heading h1 {
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-.heading p{
-    color: var(--grey2);
-    margin-bottom: 32px;
-}
+
 .text {
   margin-bottom: 8px;
   font-size: 18px;
