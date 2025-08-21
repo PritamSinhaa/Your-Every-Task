@@ -1,22 +1,98 @@
 :root {
+  /* From first branch */
+  --color-BasicBg: #202630;
+  --color-SecondaryBg: #191a1f;
+  --color-Input: #29313d;
+  --color-InputLine: #434c5a;
+  --color-CardBg: #202630;
+  --color-Vessel: #29313d;
+  --color-Line: #303846;
+  --color-DisableBtn: #434c5a;
+  --color-DisableText: #707a8a;
+  --color-TertiaryText: #4f5867;
+  --color-SecondaryText: #848e9c;
+  --color-PrimaryText: #eaecef;
+  --color-RedGreenBgText: #ffffff;
+  --color-EmphasizeText: #ff693d;
+  --color-TextOnGray: #eaecef;
+  --color-TextOnYellow: #202630;
+  --color-IconNormal: #707a8a;
+  --color-LiteBg1: #202630;
+  --color-LiteBg2: #191a1f;
+  --color-BtnBg: #fcd535;
+  --color-PrimaryYellow: #f0b90b;
+  --color-TextLink: #f0b90b;
+  --color-TradeBg: #0b0e11;
+  --color-TextToast: #f0b90b;
+  --color-DepthSellBg: #35141d;
+  --color-SellHover: #f6465d;
+  --color-Sell: #f6465d;
+  --color-TextSell: #f6465d;
+  --color-DepthBuyBg: #102821;
+  --color-BuyHover: #2ebd85;
+  --color-Buy: #2ebd85;
+  --color-TextBuy: #2ebd85;
+  --color-Error: #f6465d;
+  --color-SuccessBg: #102821;
+  --color-Success: #2ebd85;
+  --color-TagBg: #434c5a;
+  --color-Grid: #303846;
+  --color-Placeholder: #434c5a;
+  --color-ToastBg: rgba(79, 88, 103, 0.95);
+  --color-TwoColorIcon: #4f5867;
+  --color-ErrorBg: rgba(246, 70, 93, 0.1);
+  --color-BadgeBg: rgba(240, 185, 11, 0.1);
+  --color-Popup: #303846;
+  --color-Mask: rgba(11, 14, 17, 0.6);
+  --color-WidgetSecondaryBg: rgba(193, 204, 219, 0.08);
+  --color-ContainerBg: #29313d;
+  --color-YellowAlpha10: rgba(252, 213, 53, 0.1);
+  --color-YellowAlpha20: rgba(252, 213, 53, 0.2);
+  --color-RedAlpha10: rgba(246, 70, 93, 0.1);
+  --color-RedAlpha20: rgba(246, 70, 93, 0.2);
+  --color-GreenAlpha10: rgba(46, 189, 133, 0.1);
+  --color-GreenAlpha20: rgba(46, 189, 133, 0.2);
+
+  /* From second branch */
   --red: rgb(175, 37, 37);
   --grey1: rgb(248, 248, 248);
   --grey2: rgb(160, 156, 156);
 }
+
 * {
   margin: 0px;
   padding: 0px;
   font-family: "Fredoka", sans-serif;
 }
+
+body {
+  font-size: 10px;
+  box-sizing: border-box;
+  padding: 0px;
+}
+
 .page {
   width: 450px;
   margin: 0px auto;
   padding: 40px 20px;
 }
+
 .form {
   display: flex;
   flex-direction: column;
 }
+
+/* Both heading styles merged */
+.heading-container {
+  border-radius: 14px 12px;
+  background: linear-gradient(var(--color-BtnBg) 50%, var(--color-LiteBg1) 50%);
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+}
+
 .heading {
   margin: 22px auto;
   text-align: center;
@@ -25,10 +101,12 @@
   font-weight: 500;
   margin-bottom: 20px;
 }
-.heading p{
-    color: var(--grey2);
-    margin-bottom: 32px;
+.heading p {
+  color: var(--grey2);
+  margin-bottom: 32px;
 }
+
+
 .text {
   margin-bottom: 8px;
   font-size: 18px;
