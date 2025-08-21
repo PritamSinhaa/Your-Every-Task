@@ -86,7 +86,7 @@ body {
   overflow: hidden;
 }
 
-.box1 {
+.sign-in-container {
   background-color: var(--color-LiteBg1);
   grid-column: 1;
   height: 90%;
@@ -101,7 +101,7 @@ body {
   align-self: flex-end;
 }
 
-.box2 {
+.sign-up-container {
   background-color: var(--color-BtnBg);
   grid-column: 2;
   width: 50%;
