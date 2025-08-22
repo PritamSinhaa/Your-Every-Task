@@ -51,4 +51,4 @@ style attribute {
     --color-RedAlpha20: rgba(246, 70, 93, 0.2);
     --color-GreenAlpha10: rgba(46, 189, 133, 0.1);
     --color-GreenAlpha20: rgba(46, 189, 133, 0.2);
-    
+}
