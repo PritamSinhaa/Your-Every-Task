@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
 require("dotenv").config();
 
 const app = express();
+const upload = multer();
 
 mongoose
   .connect(process.env.MONGO_URI)
