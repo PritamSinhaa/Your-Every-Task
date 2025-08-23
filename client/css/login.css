@@ -93,11 +93,17 @@ body {
   overflow: hidden;
 }
 
-.heading {
-  margin: 22px auto;
-  text-align: center;
-}
-.heading h1 {
+.sign-in-container {
+  background-color: var(--color-LiteBg1);
+  grid-column: 1;
+  height: 90%;
+  width: 50%;
+  bottom: 0;
+  border-top-right-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
   font-weight: 500;
   margin-bottom: 20px;
 }
@@ -106,6 +112,18 @@ body {
   margin-bottom: 32px;
 }
 
+.sign-up-container {
+  background-color: var(--color-BtnBg);
+  grid-column: 2;
+  width: 50%;
+  border-radius: 18px 12px 0px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+  justify-self: flex-end;
+}
 
 .text {
   margin-bottom: 8px;
