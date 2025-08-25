@@ -11,8 +11,6 @@ form.addEventListener("submit", async (e) => {
       body: formData,
     });
 
-    console.log(formData.get("name"));
-
     const data = await res.json();
 
     console.log("Response from backend", data);
