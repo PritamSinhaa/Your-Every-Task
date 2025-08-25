@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 
 const User = require("../model/user");
 
+// Sign up controller
+
 exports.signUp = async (req, res) => {
   const { name, password } = req.body;
 
@@ -24,5 +26,26 @@ exports.signUp = async (req, res) => {
 
     console.error(error);
     res.status(500).json({ message: "Something went wrong!" });
+  }
+};
+
+// Sign in controller
+
+exports.signIn = async (req, res) => {
+  try {
+    const { name, password } = req.body;
+
+    const user = await User.findOne({ name });
+
+    if (!user) return res.status(400).json({ message: "User not found!" });
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch)
+      return res.status(400).json({ message: "Invalid password" });
+
+    return res.status(200).json({ message: "Sign in successful" });
+  } catch (error) {
+    res.status(500).json({ message: "Something when wrong! Try again later." });
   }
 };
