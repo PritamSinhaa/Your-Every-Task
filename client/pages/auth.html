@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign-In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+  <body>
+    <!-- full form -->
+    <div class="form-body">
+      <!-- Authonication container -->
+      <div class="auth-container">
+        <button class="sign-up">Sign-up</button>
+        <button class="sign-in">Sign-In</button>
+      </div>
+
+      <!-- sign in form body -->
+      <div class="sign-up-form-body">
+        <!-- username container -->
+        <div class="username-container container">
+          <p class="text">Username</p>
+          <input type="text" class="input" placeholder="Enter username" />
+        </div>
+
+        <!-- email container -->
+        <div class=".email-container container">
+          <p class="text">Email</p>
+          <input type="text" class="input" placeholder="Enter your email id" />
+        </div>
+
+        <!-- password container -->
+        <div class="password-container container">
+          <p class="text">Password</p>
+          <input type="password" class="input" placeholder="Enter password" />
+          <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
+        </div>
+
+        <!-- Confirm password container -->
+        <div class="confirm-password-container container">
+          <p class="text">Confirm password</p>
+          <input type="password" class="input" placeholder="Confirm password" />
+        </div>
+
+        <div class="sign-up-btn-container">
+          <button class="sign-up-btn">Sign Up</button>
+        </div>
+
+        <!-- login with other apps -->
+        <div class="login-with-others-container">
+          <div class="line-container">
+            <div class="line"></div>
+            <div class="line-text">Or sign in with</div>
+            <div class="line"></div>
+          </div>
+
+          <!--  App container -->
+          <div class="option-container">
+            <!-- Apple -->
+            <div class="app-container">
+              <img src="../assets/icons/apple.png" alt="" />
+            </div>
+
+            <!-- Google -->
+            <div class="app-container">
+              <img src="../assets/icons/google.png" alt="" />
+            </div>
+
+            <!-- Facebook -->
+            <div class="app-container">
+              <img src="../assets/icons/facebook.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign In form body -->
+
+      <form action="#" class="sign-in-form-body">
+        <!-- email container -->
+        <div class=".email-container container">
+          <label for="email" class="text">Email</label>
+
+          <input name="email" type="email" class="input" placeholder="Enter your email id" />
+        </div>
+
+        <!-- password container -->
+        <div class="password-container container">
+          <label for="password" class="text">Password</label>
+
+          <input type="password" name="password" class="input" maxlength="16" minlength="8" placeholder="Enter password" />
+
+          <a class="forget-pass" href="#">Forget Password?</a>
+
+          <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
+        </div>
+
+
+        <!-- Sign in btn -->
+        <div class="sign-up-btn-container">
+          <button type="submit" class="sign-up-btn">Sign Up</button>
+        </div>
+
+        <!-- login with other apps -->
+        <div class="login-with-others-container">
+          <div class="line-container">
+            <div class="line"></div>
+            <div class="line-text">Or sign in with</div>
+            <div class="line"></div>
+          </div>
+
+          <!--  App container -->
+          <div class="option-container">
+            <!-- Apple -->
+            <div class="app-container">
+              <img src="../assets/icons/apple.png" alt="" />
+            </div>
+
+            <!-- Google -->
+            <div class="app-container">
+              <img src="../assets/icons/google.png" alt="" />
+            </div>
+
+            <!-- Facebook -->
+            <div class="app-container">
+              <img src="../assets/icons/facebook.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="../js/auth.js"></script>
+  </body>
+</html>
