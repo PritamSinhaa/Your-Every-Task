@@ -6,7 +6,7 @@ form.addEventListener("submit", async (e) => {
   const formData = new FormData(form);
 
   try {
-    const res = await fetch("http://localhost:3000/api/auth", {
+    const res = await fetch("http://localhost:3000/api/auth/sign-up", {
       method: "POST",
       body: formData,
     });

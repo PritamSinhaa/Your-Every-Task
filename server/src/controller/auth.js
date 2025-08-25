@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 
 const User = require("../model/user");
 
+// Sign up controller
+
 exports.signUp = async (req, res) => {
   const { name, password } = req.body;
 
@@ -25,4 +27,22 @@ exports.signUp = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Something went wrong!" });
   }
+};
+
+// Sign in controller
+
+exports.signIn = async (req, res) => {
+  try {
+    const { name } = req.body;
+
+    const user = await User.findOne({ name });
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found!" });
+    }
+
+    if (!password) {
+    }
+    return;
+  } catch (error) {}
 };
