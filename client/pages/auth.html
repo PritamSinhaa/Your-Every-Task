@@ -15,81 +15,125 @@
     <link rel="stylesheet" href="../css/login.css" />
   </head>
   <body>
-    <div class="page">
-      <!-- Sign in -->
-      <form class="form" action="#">
-        <!-- Heading -->
+    <!-- full form -->
+    <div class="form-body">
+      <!-- Authonication container -->
+      <div class="auth-container">
+        <button class="sign-up">Sign-up</button>
+        <button class="sign-in">Sign-In</button>
+      </div>
 
-        <div class="heading-container">
-          <div class="sign-in-container">Sign In</div>
-          <div class="sign-up-container">Sign Up</div>
-       </div>
+      <!-- sign in form body -->
+      <div class="sign-up-form-body">
+        <!-- username container -->
+        <div class="username-container container">
+          <p class="text">Username</p>
+          <input type="text" class="input" placeholder="Enter username" />
+        </div>
 
-        <!-- Email -->
+        <!-- email container -->
+        <div class=".email-container container">
+          <p class="text">Email</p>
+          <input type="text" class="input" placeholder="Enter your email id" />
+        </div>
 
-        <p class="text">Email</p>
-        <input
-          id="email"
-          class="input email"
-          name="name"
-          type="text"
-          placeholder="Enter your email"
-        />
+        <!-- password container -->
+        <div class="password-container container">
+          <p class="text">Password</p>
+          <input type="password" class="input" placeholder="Enter password" />
+          <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
+        </div>
 
-        <!-- Password -->
+        <!-- Confirm password container -->
+        <div class="confirm-password-container container">
+          <p class="text">Confirm password</p>
+          <input type="password" class="input" placeholder="Confirm password" />
+        </div>
 
-        <div id="password-container">
-          <label class="text">password</label>
-          <div class="pass-container">
-            <input
-              id="password"
-              class="input"
-              name="email"
-              type="password"
-              placeholder="password"
-            />
+        <div class="sign-up-btn-container">
+          <button class="sign-up-btn">Sign Up</button>
+        </div>
 
-            <button>
-              <img src="../assets/icons/eyes.svg" alt="" />
-            </button>
+        <!-- login with other apps -->
+        <div class="login-with-others-container">
+          <div class="line-container">
+            <div class="line"></div>
+            <div class="line-text">Or sign in with</div>
+            <div class="line"></div>
           </div>
 
-          <p class="password-error">
-            Password much contain 8 character, symbol
-          </p>
+          <!--  App container -->
+          <div class="option-container">
+            <!-- Apple -->
+            <div class="app-container">
+              <img src="../assets/icons/apple.png" alt="" />
+            </div>
+
+            <!-- Google -->
+            <div class="app-container">
+              <img src="../assets/icons/google.png" alt="" />
+            </div>
+
+            <!-- Facebook -->
+            <div class="app-container">
+              <img src="../assets/icons/facebook.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign In form body -->
+
+      <form action="#" class="sign-in-form-body">
+        <!-- email container -->
+        <div class=".email-container container">
+          <label for="email" class="text">Email</label>
+
+          <input name="email" type="email" class="input" placeholder="Enter your email id" />
         </div>
 
-        <div class="forget-password-container">
-          <a href="#">Forgot Password?</a>
+        <!-- password container -->
+        <div class="password-container container">
+          <label for="password" class="text">Password</label>
+
+          <input type="password" name="password" class="input" maxlength="16" minlength="8" placeholder="Enter password" />
+
+          <a class="forget-pass" href="#">Forget Password?</a>
+
+          <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
         </div>
 
-        <!-- Submit button -->
 
-        <button class="submit-btn" type="submit">Sign-Up</button>
-
-        <!-- Sign up options -->
-
-        <div class="sign-option-container">
-          <div class="line"></div>
-          <p>Or sign in with</p>
-          <div class="line"></div>
-        </div>
-        <div class="sign-apps-container">
-          <button class="app">
-            <img src="../assets/icons/apple.png" alt="" />
-          </button>
-          <button class="app">
-            <img src="../assets/icons/google.png" alt="" />
-          </button>
-          <button class="app">
-            <img src="../assets/icons/facebook.png" alt="" />
-          </button>
+        <!-- Sign in btn -->
+        <div class="sign-up-btn-container">
+          <button type="submit" class="sign-up-btn">Sign Up</button>
         </div>
 
-        <!-- Last section -->
+        <!-- login with other apps -->
+        <div class="login-with-others-container">
+          <div class="line-container">
+            <div class="line"></div>
+            <div class="line-text">Or sign in with</div>
+            <div class="line"></div>
+          </div>
 
-        <div class="last-container">
-          <p>Don't have an account? <a href="#">Sign up</a></p>
+          <!--  App container -->
+          <div class="option-container">
+            <!-- Apple -->
+            <div class="app-container">
+              <img src="../assets/icons/apple.png" alt="" />
+            </div>
+
+            <!-- Google -->
+            <div class="app-container">
+              <img src="../assets/icons/google.png" alt="" />
+            </div>
+
+            <!-- Facebook -->
+            <div class="app-container">
+              <img src="../assets/icons/facebook.png" alt="" />
+            </div>
+          </div>
         </div>
       </form>
     </div>
