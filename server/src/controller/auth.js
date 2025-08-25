@@ -33,7 +33,7 @@ exports.signUp = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, password } = req.body;
 
     const user = await User.findOne({ name });
 
@@ -41,8 +41,16 @@ exports.signIn = async (req, res) => {
       return res.status(400).json({ message: "User not found!" });
     }
 
-    if (!password) {
+    const isMatchPassword = bcrypt.compare(password, user.password);
+
+    if (!isMatchPassword) {
+      return res.status(400).json({ message: "Invalid password" });
     }
-    return;
-  } catch (error) {}
+
+    return res.status(200).json({ message: "Sign in successfully." });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong! Please try again." });
+  }
 };
