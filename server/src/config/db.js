@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-const express = require("express");
-const cors = require("cors");
+require("dotenv").config();
 
-const app = express();
+const db = mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("Connect to database"))
+  .catch((err) => console.log("Can't connect to database."));
 
-app.listen(3000, () => {
-  console.log("Server is running on port 6000");
-});
+module.exports = db;
