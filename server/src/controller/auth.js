@@ -1,5 +1,17 @@
-exports.signUp = (req, res) => {
-  const data = req.body;
+const User = require("../model/user");
 
-  res.send({ success: true });
+exports.signUp = async (req, res) => {
+  const { name, password } = req.body;
+
+  try {
+    const newUser = new User({
+      name,
+      password,
+    });
+
+    await newUser.save();
+    res.send("Successfull");
+  } catch {
+    console.log("Something went wrong!");
+  }
 };

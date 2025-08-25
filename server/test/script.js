@@ -3,7 +3,6 @@ const form = document.querySelector(".form");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  console.log("hello");
   const formData = new FormData(form);
 
   try {
@@ -12,9 +11,11 @@ form.addEventListener("submit", async (e) => {
       body: formData,
     });
 
+    console.log(formData.get("name"));
+
     const data = await res.json();
 
-    console.log(data);
+    console.log("Response from backend", data);
   } catch (err) {
     console.log(err);
   }

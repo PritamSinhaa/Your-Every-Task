@@ -7,14 +7,15 @@ const db = require("./src/config/db");
 const api = require("./src/routes/api");
 
 const app = express();
-const upload = multer();
+const uplodad = multer();
 
 db; // Connect to the database
 
 app.use(express.json()); // Parser the json
 app.use(cors());
 
-app.use("/api", api);
+app.get("/", (req, res, next) => res.send("Home page"));
+app.use("/api", uplodad.none(), api);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
