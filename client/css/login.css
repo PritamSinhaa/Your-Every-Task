@@ -52,7 +52,6 @@
   --color-RedAlpha20: rgba(246, 70, 93, 0.2);
   --color-GreenAlpha10: rgba(46, 189, 133, 0.1);
   --color-GreenAlpha20: rgba(46, 189, 133, 0.2);
-
 }
 
 * {
@@ -60,7 +59,6 @@
   padding: 0px;
   font-family: "Fredoka", sans-serif;
   color: var(--color-PrimaryText);
- 
 }
 
 body {
@@ -69,38 +67,38 @@ body {
   background-color: var(--color-SecondaryBg);
 }
 
-
 /* form body */
 
-.form-body{
-  
-}
-
-
-/* sign in form body */
-.sign-in-form-body{
-  background-color: var();
+.form-body {
   width: 450px;
-  margin: 24px auto;
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  border-radius: 1rem;
+  margin: 30px auto;
   border: 1px solid rgba(169, 162, 162, 0.3);
-}
-
-/* auth container */
-.auth-container{
-  background: linear-gradient( var(--color-LiteBg1) 50%, var(--color-BtnBg)50%);
-  height: 60px;
-  display: flex;
-  overflow: hidden;
   border-radius: .8rem;
 }
 
+/* sign in form body */
+.sign-up-form-body {
+  background-color: var();
+  width: 400px;
+  margin: 0px auto;
+  display:none;
+  flex-direction: column;
+  padding: 18px 24px;
+  
+}
+
+/* auth container */
+.auth-container {
+  background: linear-gradient(var(--color-LiteBg1) 50%, var(--color-BtnBg) 50%);
+  height: 60px;
+  display: flex;
+  overflow: hidden;
+  border-radius: 0.8rem 0.8rem 0 0;
+}
+
 /* sign up button */
-.sign-up{
-  width: 50%;
+.sign-up {
+  width: 60%;
   height: 100%;
   border: none;
   background-color: var(--color-BtnBg);
@@ -108,11 +106,10 @@ body {
   font-size: 1.4rem;
   font-weight: 400;
   color: var(--color-Input);
-  
 }
 
 /* sign in  */
-.sign-in{
+.sign-in {
   width: 50%;
   height: 90%;
   border: none;
@@ -123,8 +120,121 @@ body {
 }
 
 /* form content containers */
-.container{
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0px;
+}
 
-  margin: 18px 0px;
-  height: 60px;
+/* text */
+.text {
+  color: rgb(202, 202, 202);
+}
+.input {
+  color: rgb(151, 42, 42);
+  padding: 14px 12px;
+  border-radius: 0.5rem;
+  background-color: rgb(236, 235, 235);
+}
+
+/* Sign up btn */
+/* .sign-up-btn-container {
+} */
+
+.sign-up-btn {
+  width: 100%;
+  background-color: var(--color-BtnBg);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-Input);
+  border-radius: 500px;
+  height: 50px;
+  margin-top: 32px;
+}
+
+
+
+/* login with other app */
+
+.login-with-others-container{
+  margin: 32px 0px;
+}
+
+
+.line-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.line{
+  width: 50px;
+  height: 2px;
+  background-color:  rgb(184, 180, 180);
+}
+
+
+.line-container :nth-child(2){
+  color: rgb(184, 180, 180);
+}
+
+
+.option-container{
+  margin: 32px 0px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+
+.app-container{
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 500px;
+}
+
+.sign-in-link{
+  display: flex;
+  padding: 0px auto;
+  justify-content: center;
+}
+
+/* sign in */
+.sign-in-form-body {
+  background-color: var();
+  width: 400px;
+  margin: 0px auto;
+  flex-direction: column;
+  padding: 18px 24px;
+  display: block;
+}
+
+/* password container */
+.password-container{
+  position: relative;
+}
+
+
+/* show password */
+.show-pass{
+  width: 22px;
+  position: absolute;
+  right: 14px;
+  top: 41px;
+}
+
+
+/* forget password */
+.forget-pass{
+  font-size: .8rem;
+  align-self: flex-end;
+  padding-right: 10px;
 }
