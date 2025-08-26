@@ -115,4 +115,5 @@ body {
   border-radius: 500px;
   background-color: var(--color-BtnBg);  
   color: var(--color-Input);
+  font-size: 1.4rem;
 }
