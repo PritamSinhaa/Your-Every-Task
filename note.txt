@@ -1,0 +1,3 @@
+// Handling error 
+
+status: 400 -> user is already exist | handle the error message
