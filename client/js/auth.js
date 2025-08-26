@@ -13,3 +13,5 @@ const signUpBtn = document.querySelector(".sign-up-container");
 // change full width of password border
 // forget password but add click listener ? ?keep for later
 // change the font forget password and sign up
+
+// Add new line
