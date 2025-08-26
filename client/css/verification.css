@@ -1,0 +1,118 @@
+:root {
+  /* From first branch */
+  --color-BasicBg: #202630;
+  --color-SecondaryBg: #191a1f;
+  --color-Input: #29313d;
+  --color-InputLine: #434c5a;
+  --color-CardBg: #202630;
+  --color-Vessel: #29313d;
+  --color-Line: #303846;
+  --color-DisableBtn: #434c5a;
+  --color-DisableText: #707a8a;
+  --color-TertiaryText: #4f5867;
+  --color-SecondaryText: #848e9c;
+  --color-PrimaryText: #eaecef;
+  --color-RedGreenBgText: #ffffff;
+  --color-EmphasizeText: #ff693d;
+  --color-TextOnGray: #eaecef;
+  --color-TextOnYellow: #202630;
+  --color-IconNormal: #707a8a;
+  --color-LiteBg1: #202630;
+  --color-LiteBg2: #191a1f;
+  --color-BtnBg: #fcd535;
+  --color-PrimaryYellow: #f0b90b;
+  --color-TextLink: #f0b90b;
+  --color-TradeBg: #0b0e11;
+  --color-TextToast: #f0b90b;
+  --color-DepthSellBg: #35141d;
+  --color-SellHover: #f6465d;
+  --color-Sell: #f6465d;
+  --color-TextSell: #f6465d;
+  --color-DepthBuyBg: #102821;
+  --color-BuyHover: #2ebd85;
+  --color-Buy: #2ebd85;
+  --color-TextBuy: #2ebd85;
+  --color-Error: #f6465d;
+  --color-SuccessBg: #102821;
+  --color-Success: #2ebd85;
+  --color-TagBg: #434c5a;
+  --color-Grid: #303846;
+  --color-Placeholder: #434c5a;
+  --color-ToastBg: rgba(79, 88, 103, 0.95);
+  --color-TwoColorIcon: #4f5867;
+  --color-ErrorBg: rgba(246, 70, 93, 0.1);
+  --color-BadgeBg: rgba(240, 185, 11, 0.1);
+  --color-Popup: #303846;
+  --color-Mask: rgba(11, 14, 17, 0.6);
+  --color-WidgetSecondaryBg: rgba(193, 204, 219, 0.08);
+  --color-ContainerBg: #29313d;
+  --color-YellowAlpha10: rgba(252, 213, 53, 0.1);
+  --color-YellowAlpha20: rgba(252, 213, 53, 0.2);
+  --color-RedAlpha10: rgba(246, 70, 93, 0.1);
+  --color-RedAlpha20: rgba(246, 70, 93, 0.2);
+  --color-GreenAlpha10: rgba(46, 189, 133, 0.1);
+  --color-GreenAlpha20: rgba(46, 189, 133, 0.2);
+}
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Fredoka", sans-serif;
+  color: rgb(202, 202, 202);
+  text-align: center;
+}
+
+body {
+  box-sizing: border-box;
+  padding: 0px;
+  background-color: var(--color-SecondaryBg);
+   
+}
+
+.page{
+    width: 450px;
+    margin: 32px auto;
+    border: 1px solid rgba(169, 162, 162, 0.3);
+    padding: 64px 0px;
+}
+
+.page h1{
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 16PX;
+}
+.page :nth-child(1){
+
+}
+.page :nth-child(3){
+    font-weight: 500;
+  
+}
+.text1{
+    font-size: .9rem;
+    color: rgb(156, 155, 155);;
+}
+.otp-container{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 32px 0px;
+}
+.otp{
+  background-color: gray;
+    width: 60px;
+    height: 38px;
+    font-size: rem;
+    border-radius: .4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.verify-btn{
+  display: block;
+  margin:32px auto;
+  width: 70%;
+  height: 50px;
+  border-radius: 500px;
+  background-color: var(--color-BtnBg);  
+  color: var(--color-Input);
+}
