@@ -27,31 +27,58 @@
       <div class="sign-up-form-body">
         <!-- username container -->
         <div class="username-container container">
-          <p class="text">Username</p>
-          <input type="text" class="input" placeholder="Enter username" />
+          <label for="user-id" class="text">Username</label>
+          <input
+            type="text"
+            id="user-id"
+            class="input"
+            placeholder="Enter username"
+          />
+          <p id="sign-up-username" class="text">Invalid username</p>
         </div>
 
         <!-- email container -->
         <div class=".email-container container">
-          <p class="text">Email</p>
-          <input type="text" class="input" placeholder="Enter your email id" />
+          <label for="email-id" class="text">Email</label>
+          <input
+            type="text"
+            id="email-id"
+            class="input"
+            placeholder="Enter your email id"
+          />
+          <p id="sign-up-email" class="text">Email already exist</p>
         </div>
 
         <!-- password container -->
         <div class="password-container container">
-          <p class="text">Password</p>
-          <input type="password" class="input" placeholder="Enter password" />
+          <label for="pass-id" class="text">Password</label>
+          <input
+            type="password"
+            id="pass-id"
+            class="input"
+            placeholder="Enter password"
+          />
           <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
+          <p id="sign-up-pass-error" class="text">Invalid password</p>
         </div>
 
         <!-- Confirm password container -->
         <div class="confirm-password-container container">
-          <p class="text">Confirm password</p>
-          <input type="password" class="input" placeholder="Confirm password" />
+          <label for="confirm-id" class="text">Confirm password</label>
+          <input
+            type="password"
+            id="confirm-id"
+            class="input"
+            placeholder="Confirm password"
+          />
+          <p id="sign-up-confirm-pass" class="tex">Input same password</p>
         </div>
 
+        <!-- sign up btn -->
         <div class="sign-up-btn-container">
-          <button class="sign-up-btn">Sign Up</button>
+          <button id="sign-up-btn" type="submit" class="sign-up-btn">
+            Sign Up
+          </button>
         </div>
 
         <!-- login with other apps -->
@@ -87,7 +114,15 @@
       <form action="#" class="sign-in-form-body">
         <!-- email container -->
         <div class=".email-container container">
-          <label for="email" class="text">Email</label>
+          <label for="sign-in-email" class="text">Email</label>
+
+          <input
+            id="sign-in-email"
+            name="email"
+            type="email"
+            class="input"
+            placeholder="Enter your email id"
+          />
 
           <input
             name="email"
@@ -99,7 +134,7 @@
 
         <!-- password container -->
         <div class="password-container container">
-          <label for="password" class="text">Password</label>
+          <label for="sign-in-pass" class="text">Password</label>
 
           <input
             type="password"
@@ -111,13 +146,15 @@
           />
 
           <a class="forget-pass" href="#">Forget Password?</a>
-
+          <p id="Sign-in-pass-error" class="text">Invalid password</p>
           <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
         </div>
 
         <!-- Sign in btn -->
         <div class="sign-up-btn-container">
-          <button type="submit" class="sign-up-btn">Sign Up</button>
+          <button id="sign-in-btn" type="submit" class="sign-up-btn">
+            Sign Up
+          </button>
         </div>
 
         <!-- login with other apps -->
@@ -131,19 +168,19 @@
           <!--  App container -->
           <div class="option-container">
             <!-- Apple -->
-            <div class="app-container">
+            <a href="#" id="apple-account" class="app-container">
               <img src="../assets/icons/apple.png" alt="" />
-            </div>
+            </a>
 
             <!-- Google -->
-            <div class="app-container">
+            <a id="google-account" href="#" class="app-container">
               <img src="../assets/icons/google.png" alt="" />
-            </div>
+            </a>
 
             <!-- Facebook -->
-            <div class="app-container">
+            <a id="facebook-account" href="#" class="app-container">
               <img src="../assets/icons/facebook.png" alt="" />
-            </div>
+            </a>
           </div>
         </div>
       </form>
