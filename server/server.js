@@ -3,13 +3,13 @@ const cors = require("cors");
 const multer = require("multer");
 require("dotenv").config();
 
-const db = require("./src/config/db");
 const api = require("./src/routes/api");
+const database = require("./src/config/db");
 
 const app = express();
 const uplodad = multer();
 
-db; // Connect to the database
+database(); // Connect to the database
 
 app.use(express.json()); // Parser the json
 app.use(cors());
