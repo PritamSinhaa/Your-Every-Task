@@ -1,4 +1,5 @@
 const id = (name) => document.getElementById(name);
+let showPassword = false;
 
 let validUserName = {
   message: "",
@@ -93,55 +94,56 @@ id("pass-id").addEventListener("input", function () {
       message: "Space is not allow.",
       valid: false,
     };
-
-    passwordHandler();
   } else if (!(value.length >= 8 && regex.test(value))) {
     validPassword = {
       message: "Password much be contain 8 character with symbol",
       valid: false,
+      password: value,
     };
-
-    passwordHandler();
   } else {
     validPassword = {
       message: "Valid password",
       valid: true,
       password: value,
     };
-
-    passwordHandler();
   }
+
+  passwordHandler();
 });
 
 // Confirm password
 
-function confirmHandler() {
+function confirmHandler(message) {
   id("sign-up-confirm-pass").textContent = comfirmPassword.message;
 }
 
 id("confirm-id").addEventListener("input", function () {
-  if (!validPassword.password === this.value) {
+  if (validPassword.password !== this.value) {
     comfirmPassword = {
       message: "Password is not match.",
       valid: false,
     };
-
-    confirmHandler();
   } else {
     comfirmPassword = {
       message: "Password is match",
     };
-
-    confirmHandler();
   }
+
+  confirmHandler();
 });
-<<<<<<< HEAD
-=======
 
 // Handling the password hide and show
-// const passwordShow = () => {
-
-// }
+id("password-show").addEventListener("click", function () {
+  if (!showPassword) {
+    id("pass-id").type = "text";
+    id("confirm-id").type = "text";
+    showPassword = true;
+  } else {
+    id("pass-id").type = "password";
+    id("confirm-id").type = "password";
+    showPassword = false;
+  }
+});
 
 // TODO: This is not complete yet
 // Form submittion
@@ -167,4 +169,3 @@ const authSubmit = async (formData) => {
     // FIXME: Pass to user this error
   }
 };
->>>>>>> Sign-in
