@@ -24,39 +24,61 @@
       </div>
 
       <!-- sign in form body -->
-      <div class="sign-up-form-body">
+      <form id="sign-up-form" action="#" class="sign-up-form-body">
         <!-- username container -->
         <div class="username-container container">
           <label for="user-id" class="text">Username</label>
-          <input type="text" id="user-id" class="input" placeholder="Enter username" />
+          <input
+            type="text"
+            id="user-id"
+            class="input"
+            placeholder="Enter username"
+          />
           <p id="sign-up-username" class="text">Invalid username</p>
         </div>
 
         <!-- email container -->
         <div class=".email-container container">
           <label for="email-id" class="text">Email</label>
-          <input type="text" id="email-id" class="input" placeholder="Enter your email id" />
-          <p id="sign-up-email" class="text">Email already exist </p>
+          <input
+            type="text"
+            id="email-id"
+            class="input"
+            placeholder="Enter your email id"
+          />
+          <p id="sign-up-email" class="text">Email already exist</p>
         </div>
 
         <!-- password container -->
         <div class="password-container container">
           <label for="pass-id" class="text">Password</label>
-          <input type="password" id="pass-id" class="input" placeholder="Enter password" />
+          <input
+            type="password"
+            id="pass-id"
+            class="input"
+            placeholder="Enter password"
+          />
           <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
           <p id="sign-up-pass-error" class="text">Invalid password</p>
         </div>
 
         <!-- Confirm password container -->
         <div class="confirm-password-container container">
-          <label for="confirm-id"  class="text">Confirm password</label>
-          <input type="password" id="confirm-id" class="input" placeholder="Confirm password" />
+          <label for="confirm-id" class="text">Confirm password</label>
+          <input
+            type="password"
+            id="confirm-id"
+            class="input"
+            placeholder="Confirm password"
+          />
           <p id="sign-up-confirm-pass" class="tex">Input same password</p>
         </div>
 
         <!-- sign up btn -->
         <div class="sign-up-btn-container">
-          <button id="sign-up-btn" type="submit"  class="sign-up-btn">Sign Up</button>
+          <button id="sign-up-btn" type="submit" class="sign-up-btn">
+            Sign Up
+          </button>
         </div>
 
         <!-- login with other apps -->
@@ -85,16 +107,22 @@
             </div>
           </div>
         </div>
-      </div>
+      </form>
 
       <!-- Sign In form body -->
 
-      <form action="#" class="sign-in-form-body">
+      <form id="sign-in-form" action="#" class="sign-in-form-body">
         <!-- email container -->
         <div class=".email-container container">
           <label for="sign-in-email" class="text">Email</label>
 
-          <input id="sign-in-email" name="email" type="email" class="input" placeholder="Enter your email id" />
+          <input
+            id="sign-in-email"
+            name="email"
+            type="email"
+            class="input"
+            placeholder="Enter your email id"
+          />
 
           <p id="sign-in-email" class="text">Invalid email</p>
         </div>
@@ -103,17 +131,28 @@
         <div class="password-container container">
           <label for="sign-in-pass" class="text">Password</label>
 
-          <input id="sign-in-pass" type="password" name="password" class="input" maxlength="16" minlength="8" placeholder="Enter password" />
+          <input
+            id="sign-in-pass"
+            type="password"
+            name="password"
+            class="input"
+            maxlength="16"
+            minlength="8"
+            placeholder="Enter password"
+          />
 
           <a class="forget-pass" href="#">Forget Password?</a>
           <p id="Sign-in-pass-error" class="text">Invalid password</p>
-          <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
+          <aside id="password-show">
+            <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
+          </aside>
         </div>
-
 
         <!-- Sign in btn -->
         <div class="sign-up-btn-container">
-          <button id="sign-in-btn" type="submit" class="sign-up-btn">Sign Up</button>
+          <button id="sign-in-btn" type="submit" class="sign-up-btn">
+            Sign Up
+          </button>
         </div>
 
         <!-- login with other apps -->
