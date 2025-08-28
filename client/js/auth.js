@@ -135,3 +135,33 @@ id("confirm-id").addEventListener("input", function () {
     confirmHandler();
   }
 });
+
+// Handling the password hide and show
+// const passwordShow = () => {
+
+// }
+
+// TODO: This is not complete yet
+// Form submittion
+const formSubmittion = (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(id("form"));
+
+  if (validUserName.valid && validEmail.valid && validPassword.valid) {
+    authSubmit(formData);
+  }
+};
+
+// TODO: This is not complete yet
+// Passing to backend
+const authSubmit = async (formData) => {
+  try {
+    await fetch("/auth/sign-up", {
+      type: "POST",
+      body: formData,
+    });
+  } catch (err) {
+    // FIXME: Pass to user this error
+  }
+};
