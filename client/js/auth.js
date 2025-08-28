@@ -1,5 +1,8 @@
 const id = (name) => document.getElementById(name);
 let showPassword = false;
+let firstFocus = {
+  password: false,
+};
 
 let validUserName = {
   message: "",
@@ -83,6 +86,19 @@ id("email-id").addEventListener("input", function () {
 // Validation password
 function passwordHandler() {
   id("sign-up-pass-error").textContent = validPassword.message;
+
+  if (firstFocus.password) {
+    comfirmPassword = {
+      message: "Password is not match",
+      valid: false,
+    };
+
+    confirmHandler();
+  }
+
+  id("pass-id").addEventListener("focus", function () {
+    firstFocus.password = true;
+  });
 }
 
 id("pass-id").addEventListener("input", function () {
@@ -93,6 +109,7 @@ id("pass-id").addEventListener("input", function () {
     validPassword = {
       message: "Space is not allow.",
       valid: false,
+      password: value,
     };
   } else if (!(value.length >= 8 && regex.test(value))) {
     validPassword = {
@@ -113,7 +130,7 @@ id("pass-id").addEventListener("input", function () {
 
 // Confirm password
 
-function confirmHandler(message) {
+function confirmHandler() {
   id("sign-up-confirm-pass").textContent = comfirmPassword.message;
 }
 
