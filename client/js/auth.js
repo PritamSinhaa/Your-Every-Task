@@ -1,188 +1,140 @@
+// Utility function to get element by ID
 const id = (name) => document.getElementById(name);
+
+// State
 let showPassword = false;
-let firstFocus = {
-  password: false,
+let firstFocus = { password: false };
+
+let validation = {
+  username: { message: "", valid: false },
+  email: { message: "", valid: false },
+  password: { message: "", valid: false, value: "" },
+  confirmPassword: { message: "", valid: false },
 };
 
-let validUserName = {
-  message: "",
-  valid: false,
+// ---- Handlers ----
+const setMessage = (fieldId, message) => {
+  id(fieldId).textContent = message;
 };
 
-let validEmail = {
-  message: "",
-  valid: false,
-};
-
-let validPassword = {
-  message: "",
-  valid: false,
-  password: "",
-  hide: true,
-};
-
-let comfirmPassword = {
-  message: "",
-  valid: true,
-};
-
-// Validation username
-function userNameHandler() {
-  id("sign-up-username").textContent = validUserName.message;
-}
-
+// Username Validation
 id("user-id").addEventListener("input", function () {
   const value = this.value;
 
   if (value.includes(" ")) {
-    validUserName = {
-      message: "Space is not allow",
+    validation.username = { message: "Spaces are not allowed", valid: false };
+  } else if (value.length < 4) {
+    validation.username = {
+      message: "Username must be at least 4 characters",
       valid: false,
     };
-
-    userNameHandler();
-  } else if (value.length < 3) {
-    validUserName = {
-      message: "User name much atleast 4 character",
-      valid: false,
-    };
-
-    userNameHandler();
   } else {
-    validUserName = {
-      message: "Valid username",
-      valid: true,
-    };
-
-    userNameHandler();
+    validation.username = { message: "Valid username", valid: true };
   }
+
+  setMessage("sign-up-username", validation.username.message);
 });
 
-// Validation email
-function emailHandler() {
-  id("sign-up-email").textContent = validEmail.message;
-}
-
+// Email Validation
 id("email-id").addEventListener("input", function () {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!regex.test(this.value)) {
-    validEmail = {
-      message: "Email not valid",
-      valid: false,
-    };
-
-    emailHandler();
+    validation.email = { message: "Email not valid", valid: false };
   } else {
-    validEmail = {
-      message: "Valid email",
-      valid: true,
-    };
-
-    emailHandler();
+    validation.email = { message: "Valid email", valid: true };
   }
+
+  setMessage("sign-up-email", validation.email.message);
 });
 
-// Validation password
-function passwordHandler() {
-  id("sign-up-pass-error").textContent = validPassword.message;
-
-  if (firstFocus.password) {
-    comfirmPassword = {
-      message: "Password is not match",
-      valid: false,
-    };
-
-    confirmHandler();
-  }
-
-  id("pass-id").addEventListener("focus", function () {
-    firstFocus.password = true;
-  });
-}
+// Password Validation
+id("pass-id").addEventListener("focus", () => {
+  firstFocus.password = true;
+});
 
 id("pass-id").addEventListener("input", function () {
   const value = this.value;
-  const regex = /[^a-zA-Z0-9]/;
+  const regex = /[^a-zA-Z0-9]/; // checks for symbol
 
   if (value.includes(" ")) {
-    validPassword = {
-      message: "Space is not allow.",
+    validation.password = {
+      message: "Spaces are not allowed",
       valid: false,
-      password: value,
+      value,
     };
   } else if (!(value.length >= 8 && regex.test(value))) {
-    validPassword = {
-      message: "Password much be contain 8 character with symbol",
+    validation.password = {
+      message: "Password must contain at least 8 characters including a symbol",
       valid: false,
-      password: value,
+      value,
     };
   } else {
-    validPassword = {
-      message: "Valid password",
-      valid: true,
-      password: value,
-    };
+    validation.password = { message: "Valid password", valid: true, value };
   }
 
-  passwordHandler();
+  setMessage("sign-up-pass-error", validation.password.message);
+
+  // Re-check confirm password if already typed
+  if (firstFocus.password) checkConfirmPassword();
 });
 
-// Confirm password
+// Confirm Password Validation
+id("confirm-id").addEventListener("input", checkConfirmPassword);
 
-function confirmHandler() {
-  id("sign-up-confirm-pass").textContent = comfirmPassword.message;
+function checkConfirmPassword() {
+  const confirmValue = id("confirm-id").value;
+
+  if (validation.password.value !== confirmValue) {
+    validation.confirmPassword = {
+      message: "Passwords do not match",
+      valid: false,
+    };
+  } else {
+    validation.confirmPassword = { message: "Passwords match", valid: true };
+  }
+
+  setMessage("sign-up-confirm-pass", validation.confirmPassword.message);
 }
 
-id("confirm-id").addEventListener("input", function () {
-  if (validPassword.password !== this.value) {
-    comfirmPassword = {
-      message: "Password is not match.",
-      valid: false,
-    };
-  } else {
-    comfirmPassword = {
-      message: "Password is match",
-    };
-  }
-
-  confirmHandler();
-});
-
-// Handling the password hide and show
+// Password Show/Hide
 id("password-show").addEventListener("click", function () {
-  if (!showPassword) {
-    id("pass-id").type = "text";
-    id("confirm-id").type = "text";
-    showPassword = true;
-  } else {
-    id("pass-id").type = "password";
-    id("confirm-id").type = "password";
-    showPassword = false;
-  }
+  showPassword = !showPassword;
+
+  id("pass-id").type = showPassword ? "text" : "password";
+  id("confirm-id").type = showPassword ? "text" : "password";
 });
 
-// TODO: This is not complete yet
-// Form submittion
-const formSubmittion = (e) => {
+// Form Submission
+id("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const formData = new FormData(id("form"));
+  const { username, email, password, confirmPassword } = validation;
 
-  if (validUserName.valid && validEmail.valid && validPassword.valid) {
-    authSubmit(formData);
+  if (
+    username.valid &&
+    email.valid &&
+    password.valid &&
+    confirmPassword.valid
+  ) {
+    const formData = new FormData(id("form"));
+    await authSubmit(formData);
+  } else {
+    alert("Please fix errors before submitting.");
   }
-};
+});
 
-// TODO: This is not complete yet
-// Passing to backend
+// Backend Request
 const authSubmit = async (formData) => {
   try {
-    await fetch("/auth/sign-up", {
-      type: "POST",
+    const res = await fetch("/auth/sign-up", {
+      method: "POST",
       body: formData,
     });
+
+    // Response from backend
   } catch (err) {
-    // FIXME: Pass to user this error
+    console.error("Submission failed:", err);
+    // TODO: Show error to user in UI
   }
 };
