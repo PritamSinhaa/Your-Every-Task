@@ -1,67 +1,137 @@
-const form = document.querySelector(".form1");
-const password = document.querySelector("#password");
-const passwordError = document.querySelector(".password-error");
-const showPassword = document.querySelector("#show-password");
-const signInBtn = document.querySelector(".sign-in-container");
-const signUpBtn = document.querySelector(".sign-up-container");
+const id = (name) => document.getElementById(name);
 
-// Password type case
-const passwordInputType = {
-  hide: "password",
-  show: "text",
+let validUserName = {
+  message: "",
+  valid: false,
 };
 
-// Keep for back-end
-const authFun = () => {
-  console.log(" Auth is Succesfull");
+let validEmail = {
+  message: "",
+  valid: false,
 };
 
-// Handling form submitting
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+let validPassword = {
+  message: "",
+  valid: false,
+  password: "",
+  hide: true,
+};
 
-  const formData = new FormData(form);
+let comfirmPassword = {
+  message: "",
+  valid: true,
+};
 
-  console.log(formData.get("email"));
+// Validation username
+function userNameHandler() {
+  id("sign-up-username").textContent = validUserName.message;
+}
 
-  const email = document.querySelector("#email").value;
-  const password = document.querySelector("#password").value;
-  let emailValid = false;
-  let passwordValid = false;
-  +email.endsWith("@gmail.com") ? (emailValid = false) : (emailValid = true);
+id("user-id").addEventListener("input", function () {
+  const value = this.value;
 
-  if (
-    password.length > 8 &&
-    /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/.test(password)
-  ) {
-    passwordError.style.display = "none";
-    passwordValid = true;
+  if (value.includes(" ")) {
+    validUserName = {
+      message: "Space is not allow",
+      valid: false,
+    };
+
+    userNameHandler();
+  } else if (value.length < 3) {
+    validUserName = {
+      message: "User name much atleast 4 character",
+      valid: false,
+    };
+
+    userNameHandler();
   } else {
-    passwordError.style.display = "block";
-    passwordValid = false;
+    validUserName = {
+      message: "Valid username",
+      valid: true,
+    };
+
+    userNameHandler();
   }
-
-  console.log(passwordValid, emailValid);
-
-  passwordValid && emailValid
-    ? authFun()
-    : console.log("Authentification fail");
 });
 
-// Password show and hide
-showPassword.addEventListener("click", () => {
-  password.getAttribute("type") === passwordInputType.hide
-    ? password.setAttribute("type", passwordInputType.show)
-    : password.setAttribute("type", passwordInputType.hide);
+// Validation email
+function emailHandler() {
+  id("sign-up-email").textContent = validEmail.message;
+}
+
+id("email-id").addEventListener("input", function () {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!regex.test(this.value)) {
+    validEmail = {
+      message: "Email not valid",
+      valid: false,
+    };
+
+    emailHandler();
+  } else {
+    validEmail = {
+      message: "Valid email",
+      valid: true,
+    };
+
+    emailHandler();
+  }
 });
 
-//sign in button
+// Validation password
+function passwordHandler() {
+  id("sign-up-pass-error").textContent = validPassword.message;
+}
 
-signInBtn.addEventListener("click", (e) => {});
+id("pass-id").addEventListener("input", function () {
+  const value = this.value;
+  const regex = /[^a-zA-Z0-9]/;
 
-// When the form is not valid refocus on the error part
-// Add click listener in eye button to hidden or show the password
-// Make function about sign in and sign up for switching btw
-// change full width of password border
-// forget password but add click listener ? ?keep for later
-// change the font forget password and sign up
+  if (value.includes(" ")) {
+    validPassword = {
+      message: "Space is not allow.",
+      valid: false,
+    };
+
+    passwordHandler();
+  } else if (!(value.length >= 8 && regex.test(value))) {
+    validPassword = {
+      message: "Password much be contain 8 character with symbol",
+      valid: false,
+    };
+
+    passwordHandler();
+  } else {
+    validPassword = {
+      message: "Valid password",
+      valid: true,
+      password: value,
+    };
+
+    passwordHandler();
+  }
+});
+
+// Confirm password
+
+function confirmHandler() {
+  id("sign-up-confirm-pass").textContent = comfirmPassword.message;
+}
+
+id("confirm-id").addEventListener("input", function () {
+  if (!validPassword.password === this.value) {
+    comfirmPassword = {
+      message: "Password is not match.",
+      valid: false,
+    };
+
+    confirmHandler();
+  } else {
+    comfirmPassword = {
+      message: "Password is match",
+    };
+
+    confirmHandler();
+  }
+});
