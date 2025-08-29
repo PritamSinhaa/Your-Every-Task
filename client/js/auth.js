@@ -2,11 +2,11 @@ const id = (id) => document.getElementById(id);
 
 // State
 const validation = {
-  userName: { message: "", valid: false, firstFocus: true, focusOut: false },
+  username: { message: "", valid: false, firstFocus: true, focusOut: false },
   email: { message: "", valid: false, firstFocus: true, focusOut: false },
 };
 
-// Checking focus out
+// Checking focus in/out
 function checkFocus(fieldId, fieldState) {
   id(fieldId).addEventListener("focus", function () {
     fieldState.firstFocus = false;
@@ -19,37 +19,64 @@ function checkFocus(fieldId, fieldState) {
 }
 
 // Handling error
-const errorHandler = (fieldId, dataId, messageId, message) => {
+const errorHandler = (fieldId, fieldState, messageId, message) => {
   id(messageId).textContent = message;
 
-  if (!dataId.valid && !dataId.firstFocus && dataId.focusOut) {
+  if (!fieldState.valid && !fieldState.firstFocus && fieldState.focusOut) {
     id(fieldId).style.border = "4px solid red";
   } else {
-    id(fieldId).style.border = "2px solid green"; // or reset border
+    id(fieldId).style.border = "none";
   }
 };
 
-// Handling username
-id("user-name").addEventListener("input", function () {
+// -------------------------
+// Handling Sign Up Username
+// -------------------------
+id("signup-username").addEventListener("input", function () {
   const value = this.value.trim();
 
   if (value.includes(" ")) {
-    validation.userName.message = "Space is not allowed";
-    validation.userName.valid = false;
-  } else if (value.length < 4 && !validation.userName.firstFocus) {
-    validation.userName.message = "User name must be at least 4 characters";
-    validation.userName.valid = false;
+    validation.username.message = "Spaces are not allowed";
+    validation.username.valid = false;
+  } else if (value.length < 4 && !validation.username.firstFocus) {
+    validation.username.message = "Username must be at least 4 characters";
+    validation.username.valid = false;
   } else {
-    validation.userName.message = "";
-    validation.userName.valid = true;
+    validation.username.message = "";
+    validation.username.valid = true;
   }
 
   errorHandler(
-    "user-name",
-    validation.userName,
-    "sign-up-username",
-    validation.userName.message
+    "signup-username",
+    validation.username,
+    "error-signup-username",
+    validation.username.message
   );
 });
 
-checkFocus("user-name", validation.userName);
+checkFocus("signup-username", validation.username);
+
+// -------------------------
+// Handling Sign Up Email
+// -------------------------
+id("signup-email").addEventListener("input", function () {
+  const value = this.value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(value) && !validation.email.firstFocus) {
+    validation.email.message = "Invalid email address";
+    validation.email.valid = false;
+  } else {
+    validation.email.message = "";
+    validation.email.valid = true;
+  }
+
+  errorHandler(
+    "signup-email",
+    validation.email,
+    "error-signup-email",
+    validation.email.message
+  );
+});
+
+checkFocus("signup-email", validation.email);
