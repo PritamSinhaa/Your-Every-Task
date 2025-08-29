@@ -1,167 +1,55 @@
-// Utility function to get element by ID
-const id = (name) => document.getElementById(name);
+const id = (id) => document.getElementById(id);
 
 // State
-let showPassword = false;
-let firstFocus = {
-  username: true,
-  email: true,
-  password: true,
-  confirm: true,
+const validation = {
+  userName: { message: "", valid: false, firstFocus: true, focusOut: false },
+  email: { message: "", valid: false, firstFocus: true, focusOut: false },
 };
 
-let validation = {
-  username: { message: "", valid: false },
-  email: { message: "", valid: false },
-  password: { message: "", valid: false, value: "" },
-  confirmPassword: { message: "", valid: false },
-};
-
-// ---- Message handler ----
-const setMessage = (fieldId, message) => {
-  id(fieldId).textContent = message;
-};
-
-// ====== Remove error border ======
-const rmBorder = (fieldId) => {
-  id(fieldId).style.border = "none";
-};
-
-// ======= Check focus out error ========
-const checkFocus = (fieldId, messageId, message) => {
-  id(fieldId).addEventListener("focusout", () => {
-    firstFocus.username = false;
-    setMessage(messageId, message);
-
-    if (!validation.username.valid) {
-      id(fieldId).style.border = "4px red solid";
-    }
+// Checking focus out
+function checkFocus(fieldId, fieldState) {
+  id(fieldId).addEventListener("focus", function () {
+    fieldState.firstFocus = false;
   });
-};
 
-// Username Validation
-id("user-id").addEventListener("input", function () {
-  const value = this.value;
-
-  if (value.includes(" ")) {
-    validation.username = { message: "Spaces are not allowed", valid: false };
-  } else if (value.length < 4) {
-    validation.username = {
-      message: "Username must be at least 4 characters",
-      valid: false,
-    };
-  } else {
-    rmBorder("user-id");
-    validation.username = { message: "Valid username", valid: true };
-  }
-
-  if (!firstFocus.username) {
-    setMessage("sign-up-username", validation.username.message);
-  }
-});
-
-checkFocus("user-id", "sign-up-username", validation.username.message);
-
-// Email Validation
-id("email-id").addEventListener("input", function () {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!regex.test(this.value)) {
-    validation.email = { message: "Email not valid", valid: false };
-  } else {
-    validation.email = { message: "Valid email", valid: true };
-  }
-
-  setMessage("sign-up-email", validation.email.message);
-});
-
-// Password Validation
-id("pass-id").addEventListener("focus", () => {
-  firstFocus.password = true;
-});
-
-id("pass-id").addEventListener("input", function () {
-  const value = this.value;
-  const regex = /[^a-zA-Z0-9]/; // checks for symbol
-
-  if (value.includes(" ")) {
-    validation.password = {
-      message: "Spaces are not allowed",
-      valid: false,
-      value,
-    };
-  } else if (!(value.length >= 8 && regex.test(value))) {
-    validation.password = {
-      message: "Password must contain at least 8 characters including a symbol",
-      valid: false,
-      value,
-    };
-  } else {
-    validation.password = { message: "Valid password", valid: true, value };
-  }
-
-  setMessage("sign-up-pass-error", validation.password.message);
-
-  // Re-check confirm password if already typed
-  if (firstFocus.password) checkConfirmPassword();
-});
-
-// Confirm Password Validation
-id("confirm-id").addEventListener("input", checkConfirmPassword);
-
-function checkConfirmPassword() {
-  const confirmValue = id("confirm-id").value;
-
-  if (validation.password.value !== confirmValue) {
-    validation.confirmPassword = {
-      message: "Passwords do not match",
-      valid: false,
-    };
-  } else {
-    validation.confirmPassword = { message: "Passwords match", valid: true };
-  }
-
-  setMessage("sign-up-confirm-pass", validation.confirmPassword.message);
+  id(fieldId).addEventListener("focusout", function () {
+    fieldState.focusOut = true;
+    id(fieldId).dispatchEvent(new Event("input"));
+  });
 }
 
-// Password Show/Hide
-id("password-show").addEventListener("click", function () {
-  showPassword = !showPassword;
+// Handling error
+const errorHandler = (fieldId, dataId, messageId, message) => {
+  id(messageId).textContent = message;
 
-  id("pass-id").type = showPassword ? "text" : "password";
-  id("confirm-id").type = showPassword ? "text" : "password";
-});
-
-// Form Submission
-id("sign-up-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const { username, email, password, confirmPassword } = validation;
-
-  if (
-    username.valid &&
-    email.valid &&
-    password.valid &&
-    confirmPassword.valid
-  ) {
-    const formData = new FormData(id("form"));
-    await authSubmit(formData);
+  if (!dataId.valid && !dataId.firstFocus && dataId.focusOut) {
+    id(fieldId).style.border = "4px solid red";
   } else {
-    alert("Please fix errors before submitting.");
-  }
-});
-
-// Backend Request
-const authSubmit = async (formData) => {
-  try {
-    const res = await fetch("/auth/sign-up", {
-      method: "POST",
-      body: formData,
-    });
-
-    // Response from backend
-  } catch (err) {
-    console.error("Submission failed:", err);
-    // TODO: Show error to user in UI
+    id(fieldId).style.border = "2px solid green"; // or reset border
   }
 };
+
+// Handling username
+id("user-name").addEventListener("input", function () {
+  const value = this.value.trim();
+
+  if (value.includes(" ")) {
+    validation.userName.message = "Space is not allowed";
+    validation.userName.valid = false;
+  } else if (value.length < 4 && !validation.userName.firstFocus) {
+    validation.userName.message = "User name must be at least 4 characters";
+    validation.userName.valid = false;
+  } else {
+    validation.userName.message = "";
+    validation.userName.valid = true;
+  }
+
+  errorHandler(
+    "user-name",
+    validation.userName,
+    "sign-up-username",
+    validation.userName.message
+  );
+});
+
+checkFocus("user-name", validation.userName);
