@@ -3,7 +3,12 @@ const id = (name) => document.getElementById(name);
 
 // State
 let showPassword = false;
-let firstFocus = { password: false };
+let firstFocus = {
+  username: true,
+  email: true,
+  password: true,
+  confirm: true,
+};
 
 let validation = {
   username: { message: "", valid: false },
@@ -12,9 +17,26 @@ let validation = {
   confirmPassword: { message: "", valid: false },
 };
 
-// ---- Handlers ----
+// ---- Message handler ----
 const setMessage = (fieldId, message) => {
   id(fieldId).textContent = message;
+};
+
+// ====== Remove error border ======
+const rmBorder = (fieldId) => {
+  id(fieldId).style.border = "none";
+};
+
+// ======= Check focus out error ========
+const checkFocus = (fieldId, messageId, message) => {
+  id(fieldId).addEventListener("focusout", () => {
+    firstFocus.username = false;
+    setMessage(messageId, message);
+
+    if (!validation.username.valid) {
+      id(fieldId).style.border = "4px red solid";
+    }
+  });
 };
 
 // Username Validation
@@ -29,11 +51,16 @@ id("user-id").addEventListener("input", function () {
       valid: false,
     };
   } else {
+    rmBorder("user-id");
     validation.username = { message: "Valid username", valid: true };
   }
 
-  setMessage("sign-up-username", validation.username.message);
+  if (!firstFocus.username) {
+    setMessage("sign-up-username", validation.username.message);
+  }
 });
+
+checkFocus("user-id", "sign-up-username", validation.username.message);
 
 // Email Validation
 id("email-id").addEventListener("input", function () {
@@ -106,7 +133,7 @@ id("password-show").addEventListener("click", function () {
 });
 
 // Form Submission
-id("form").addEventListener("submit", async (e) => {
+id("sign-up-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const { username, email, password, confirmPassword } = validation;
