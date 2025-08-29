@@ -4,6 +4,7 @@ const id = (id) => document.getElementById(id);
 const validation = {
   username: { message: "", valid: false, firstFocus: true, focusOut: false },
   email: { message: "", valid: false, firstFocus: true, focusOut: false },
+  password: { message: "", valid: false, firstFocus: true, focusOut: false },
 };
 
 // Checking focus in/out
@@ -19,11 +20,11 @@ function checkFocus(fieldId, fieldState) {
 }
 
 // Handling error
-const errorHandler = (fieldId, fieldState, messageId, message) => {
-  id(messageId).textContent = message;
+const errorHandler = (fieldId, fieldState, messageId) => {
+  id(messageId).textContent = fieldState.message;
 
   if (!fieldState.valid && !fieldState.firstFocus && fieldState.focusOut) {
-    id(fieldId).style.border = "4px solid red";
+    id(fieldId).style.border = "4px solid yellow";
   } else {
     id(fieldId).style.border = "none";
   }
@@ -33,7 +34,7 @@ const errorHandler = (fieldId, fieldState, messageId, message) => {
 // Handling Sign Up Username
 // -------------------------
 id("signup-username").addEventListener("input", function () {
-  const value = this.value.trim();
+  const value = this.value;
 
   if (value.includes(" ")) {
     validation.username.message = "Spaces are not allowed";
@@ -46,12 +47,7 @@ id("signup-username").addEventListener("input", function () {
     validation.username.valid = true;
   }
 
-  errorHandler(
-    "signup-username",
-    validation.username,
-    "error-signup-username",
-    validation.username.message
-  );
+  errorHandler("signup-username", validation.username, "error-signup-username");
 });
 
 checkFocus("signup-username", validation.username);
@@ -71,12 +67,32 @@ id("signup-email").addEventListener("input", function () {
     validation.email.valid = true;
   }
 
-  errorHandler(
-    "signup-email",
-    validation.email,
-    "error-signup-email",
-    validation.email.message
-  );
+  errorHandler("signup-email", validation.email, "error-signup-email");
 });
 
 checkFocus("signup-email", validation.email);
+
+// -------------------------
+// Handling Sign Up Password
+// -------------------------
+id("signup-password").addEventListener("input", function () {
+  const passwordRegex = /^(?=.*[^a-zA-Z0-9])\S{8,}$/;
+
+  if (!passwordRegex.test(this.value)) {
+    if (this.value.includes(" ")) {
+      validation.password.message = "Spaces are not allowed";
+    } else if (this.value.length < 8) {
+      validation.password.message = "Password must be at least 8 characters";
+    } else {
+      validation.password.message = "Password must include a symbol";
+    }
+    validation.password.valid = false;
+  } else {
+    validation.password.message = "";
+    validation.password.valid = true;
+  }
+
+  errorHandler("signup-password", validation.password, "error-signup-password");
+});
+
+checkFocus("signup-password", validation.password);
