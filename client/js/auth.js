@@ -1,6 +1,8 @@
 const id = (id) => document.getElementById(id);
 
 // State
+let passwordToggle = false;
+
 const validation = {
   username: { message: "", valid: false, firstFocus: true, focusOut: false },
   email: { message: "", valid: false, firstFocus: true, focusOut: false },
@@ -84,6 +86,7 @@ checkFocus("signup-email", validation.email);
 // -------------------------
 // Handling Sign Up Password
 // -------------------------
+
 id("signup-password").addEventListener("input", function () {
   const passwordRegex = /^(?=.*[^a-zA-Z0-9])\S{8,}$/;
 
@@ -142,3 +145,20 @@ function checkPassword() {
 }
 
 checkFocus("signup-confirm-password", validation.confirmPassword);
+
+// ----------------------------------
+// Handling password show or hide
+// ----------------------------------
+id("password-toggle").addEventListener("click", function () {
+  if (passwordToggle) {
+    id("signup-password").type = "password";
+    id("signup-confirm-password").type = "password";
+
+    passwordToggle = false;
+  } else {
+    id("signup-password").type = "text";
+    id("signup-confirm-password").type = "text";
+
+    passwordToggle = true;
+  }
+});
