@@ -61,8 +61,8 @@ $("signup-username").addEventListener("input", function () {
   if (value.includes(" ")) {
     validation.username.message = "Spaces are not allowed";
     validation.username.valid = false;
-  } else if (value.length < 4 && !validation.username.firstFocus) {
-    validation.username.message = "Username must be at least 4 characters";
+  } else if (value.length < 3 && !validation.username.firstFocus) {
+    validation.username.message = "Username must be at least 3 characters";
     validation.username.valid = false;
   } else {
     validation.username.message = "";
