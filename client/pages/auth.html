@@ -6,186 +6,167 @@
     <title>Sign-In</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/auth.css" />
   </head>
   <body>
-    <!-- full form -->
-    <div class="form-body">
-      <!-- Authonication container -->
-      <div class="auth-container">
-        <button class="sign-up">Sign-up</button>
-        <button class="sign-in">Sign-In</button>
+    <!-- Full Form Wrapper -->
+    <div class="auth-wrapper">
+      <!-- Authentication Toggle -->
+      <div class="auth-toggle">
+        <button class="toggle-btn" id="toggle-signup">Sign Up</button>
+        <button class="toggle-btn" id="toggle-signin">Sign In</button>
       </div>
 
-      <!-- sign in form body -->
-      <form id="sign-up-form" action="#" class="sign-up-form-body">
-        <!-- username container -->
-        <div class="username-container container">
-          <label for="user-id" class="text">Username</label>
+      <!-- Sign Up Form -->
+      <form id="form-signup" action="#" class="form form-signup">
+        <!-- Username -->
+        <div class="form-group">
+          <label for="signup-username" class="form-label">Username</label>
           <input
             type="text"
-            id="user-id"
-            class="input"
+            id="signup-username"
+            class="form-input"
             placeholder="Enter username"
           />
-          <p id="sign-up-username" class="text">Invalid username</p>
+          <p id="error-signup-username" class="form-error"></p>
         </div>
 
-        <!-- email container -->
-        <div class=".email-container container">
-          <label for="email-id" class="text">Email</label>
+        <!-- Email -->
+        <div class="form-group">
+          <label for="signup-email" class="form-label">Email</label>
           <input
             type="text"
-            id="email-id"
-            class="input"
+            id="signup-email"
+            class="form-input"
             placeholder="Enter your email id"
           />
-          <p id="sign-up-email" class="text">Email already exist</p>
+          <p id="error-signup-email" class="form-error"></p>
         </div>
 
-        <!-- password container -->
-        <div class="password-container container">
-          <label for="pass-id" class="text">Password</label>
+        <!-- Password -->
+        <div class="form-group">
+          <label for="signup-password" class="form-label">Password</label>
           <input
             type="password"
-            id="pass-id"
-            class="input"
+            id="signup-password"
+            class="form-input"
             placeholder="Enter password"
           />
-          <aside id="password-show">
-            <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
+          <aside class="password-toggle">
+            <img
+              src="../assets/icons/eyes.svg"
+              alt="Show Password"
+              class="icon-show-password"
+            />
           </aside>
-          <p id="sign-up-pass-error" class="text">Invalid password</p>
+          <p id="error-signup-password" class="form-error"></p>
         </div>
 
-        <!-- Confirm password container -->
-        <div class="confirm-password-container container">
-          <label for="confirm-id" class="text">Confirm password</label>
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="signup-confirm-password" class="form-label"
+            >Confirm password</label
+          >
           <input
             type="password"
-            id="confirm-id"
-            class="input"
+            id="signup-confirm-password"
+            class="form-input"
             placeholder="Confirm password"
           />
-          <p id="sign-up-confirm-pass" class="tex">Input same password</p>
+          <p id="error-signup-confirm-password" class="form-error"></p>
         </div>
 
-        <!-- sign up btn -->
-        <div class="sign-up-btn-container">
-          <button id="sign-up-btn" type="submit" class="sign-up-btn">
+        <!-- Sign Up Button -->
+        <div class="form-action">
+          <button id="btn-signup" type="submit" class="btn-submit">
             Sign Up
           </button>
         </div>
 
-        <!-- login with other apps -->
-        <div class="login-with-others-container">
-          <div class="line-container">
+        <!-- Social Login -->
+        <div class="social-login">
+          <div class="divider">
             <div class="line"></div>
-            <div class="line-text">Or sign in with</div>
+            <div class="divider-text">Or sign up with</div>
             <div class="line"></div>
           </div>
-
-          <!--  App container -->
-          <div class="option-container">
-            <!-- Apple -->
-            <div class="app-container">
-              <img src="../assets/icons/apple.png" alt="" />
+          <div class="social-options">
+            <div class="social-btn">
+              <img src="../assets/icons/apple.png" alt="Apple" />
             </div>
-
-            <!-- Google -->
-            <div class="app-container">
-              <img src="../assets/icons/google.png" alt="" />
+            <div class="social-btn">
+              <img src="../assets/icons/google.png" alt="Google" />
             </div>
-
-            <!-- Facebook -->
-            <div class="app-container">
-              <img src="../assets/icons/facebook.png" alt="" />
+            <div class="social-btn">
+              <img src="../assets/icons/facebook.png" alt="Facebook" />
             </div>
           </div>
         </div>
       </form>
 
-      <!-- Sign In form body -->
-
-      <form id="sign-in-form" action="#" class="sign-in-form-body">
-        <!-- email container -->
-        <div class=".email-container container">
-          <label for="sign-in-email" class="text">Email</label>
-
+      <!-- Sign In Form -->
+      <form id="form-signin" action="#" class="form form-signin">
+        <!-- Email -->
+        <div class="form-group">
+          <label for="signin-email" class="form-label">Email</label>
           <input
-            id="sign-in-email"
-            name="email"
+            id="signin-email"
             type="email"
-            class="input"
+            class="form-input"
             placeholder="Enter your email id"
           />
-
-          <p id="sign-in-email" class="text">Invalid email</p>
-          <input
-            name="email"
-            type="email"
-            class="input"
-            placeholder="Enter your email id"
-          />
+          <p id="error-signin-email" class="form-error"></p>
         </div>
 
-        <!-- password container -->
-        <div class="password-container container">
-          <label for="sign-in-pass" class="text">Password</label>
-
+        <!-- Password -->
+        <div class="form-group">
+          <label for="signin-password" class="form-label">Password</label>
           <input
-            id="sign-in-pass"
+            id="signin-password"
             type="password"
-            name="password"
-            class="input"
+            class="form-input"
             maxlength="16"
             minlength="8"
             placeholder="Enter password"
           />
-
-          <a class="forget-pass" href="#">Forget Password?</a>
-          <p id="Sign-in-pass-error" class="text">Invalid password</p>
-          <aside id="password-show">
-            <img src="../assets/icons/eyes.svg" alt="" class="show-pass" />
+          <a class="forgot-password" href="#">Forgot Password?</a>
+          <p id="error-signin-password" class="form-error"></p>
+          <aside class="password-toggle">
+            <img
+              src="../assets/icons/eyes.svg"
+              alt="Show Password"
+              class="icon-show-password"
+            />
           </aside>
         </div>
 
-        <!-- Sign in btn -->
-        <div class="sign-up-btn-container">
-          <button id="sign-in-btn" type="submit" class="sign-up-btn">
-            Sign Up
+        <!-- Sign In Button -->
+        <div class="form-action">
+          <button id="btn-signin" type="submit" class="btn-submit">
+            Sign In
           </button>
         </div>
 
-        <!-- login with other apps -->
-        <div class="login-with-others-container">
-          <div class="line-container">
+        <!-- Social Login -->
+        <div class="social-login">
+          <div class="divider">
             <div class="line"></div>
-            <div class="line-text">Or sign in with</div>
+            <div class="divider-text">Or sign in with</div>
             <div class="line"></div>
           </div>
-
-          <!--  App container -->
-          <div class="option-container">
-            <!-- Apple -->
-            <a href="#" id="apple-account" class="app-container">
-              <img src="../assets/icons/apple.png" alt="" />
+          <div class="social-options">
+            <a href="#" id="signin-apple" class="social-btn">
+              <img src="../assets/icons/apple.png" alt="Apple" />
             </a>
-
-            <!-- Google -->
-            <a id="google-account" href="#" class="app-container">
-              <img src="../assets/icons/google.png" alt="" />
+            <a href="#" id="signin-google" class="social-btn">
+              <img src="../assets/icons/google.png" alt="Google" />
             </a>
-
-            <!-- Facebook -->
-            <a id="facebook-account" href="#" class="app-container">
-              <img src="../assets/icons/facebook.png" alt="" />
+            <a href="#" id="signin-facebook" class="social-btn">
+              <img src="../assets/icons/facebook.png" alt="Facebook" />
             </a>
           </div>
         </div>
