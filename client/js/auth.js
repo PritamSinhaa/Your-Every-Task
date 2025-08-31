@@ -4,16 +4,25 @@ const id = (id) => document.getElementById(id);
 const validation = {
   username: { message: "", valid: false, firstFocus: true, focusOut: false },
   email: { message: "", valid: false, firstFocus: true, focusOut: false },
-  password: { message: "", valid: false, firstFocus: true, focusOut: false },
+  password: {
+    message: "",
+    valid: false,
+    firstFocus: true,
+    focusOut: false,
+    value: "",
+  },
+  confirmPassword: {
+    message: "",
+    valid: false,
+    firstFocus: true,
+    focusOut: false,
+  },
 };
 
 // Checking focus in/out
 function checkFocus(fieldId, fieldState) {
-  id(fieldId).addEventListener("focus", function () {
-    fieldState.firstFocus = false;
-  });
-
   id(fieldId).addEventListener("focusout", function () {
+    fieldState.firstFocus = false;
     fieldState.focusOut = true;
     id(fieldId).dispatchEvent(new Event("input"));
   });
@@ -86,13 +95,50 @@ id("signup-password").addEventListener("input", function () {
     } else {
       validation.password.message = "Password must include a symbol";
     }
+
     validation.password.valid = false;
   } else {
     validation.password.message = "";
     validation.password.valid = true;
   }
 
+  validation.password.value = this.value;
+
   errorHandler("signup-password", validation.password, "error-signup-password");
+  checkPassword();
 });
 
 checkFocus("signup-password", validation.password);
+
+// ----------------------------------
+// Handling Sign Up Password Confirm
+// ----------------------------------
+
+id("signup-confirm-password").addEventListener("input", function () {
+  checkPassword();
+});
+
+function checkPassword() {
+  const confirmPassword = id("signup-confirm-password").value;
+
+  if (
+    validation.password.value !== confirmPassword &&
+    !validation.confirmPassword.firstFocus
+  ) {
+    validation.confirmPassword.message = "Password is not match";
+    validation.confirmPassword.valid = false;
+  }
+
+  if (validation.password.value === confirmPassword) {
+    validation.confirmPassword.message = "";
+    validation.confirmPassword.valid = true;
+  }
+
+  errorHandler(
+    "signup-confirm-password",
+    validation.confirmPassword,
+    "error-signup-confirm-password"
+  );
+}
+
+checkFocus("signup-confirm-password", validation.confirmPassword);
