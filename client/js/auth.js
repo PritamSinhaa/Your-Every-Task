@@ -1,4 +1,4 @@
-const id = (id) => document.getElementById(id);
+const $ = (id) => document.getElementById(id);
 
 // State
 let passwordToggle = false;
@@ -23,28 +23,39 @@ const validation = {
 
 // Checking focus in/out
 function checkFocus(fieldId, fieldState) {
-  id(fieldId).addEventListener("focusout", function () {
+  $(fieldId).addEventListener("focusout", function () {
     fieldState.firstFocus = false;
     fieldState.focusOut = true;
-    id(fieldId).dispatchEvent(new Event("input"));
+    $(fieldId).dispatchEvent(new Event("input"));
   });
 }
 
 // Handling error
 const errorHandler = (fieldId, fieldState, messageId) => {
-  id(messageId).textContent = fieldState.message;
+  $(messageId).textContent = fieldState.message;
 
   if (!fieldState.valid && !fieldState.firstFocus && fieldState.focusOut) {
-    id(fieldId).style.border = "4px solid yellow";
+    $(fieldId).style.border = "4px solid yellow";
   } else {
-    id(fieldId).style.border = "none";
+    $(fieldId).style.border = "none";
   }
+};
+
+// Handling input refocus
+const refocusHandler = function (Fieldid) {
+  $(Fieldid).focus();
+};
+
+// Handling form summit response
+// TODO: Finished up later
+const responseHandler = (res) => {
+  console.log("Successfull ", res);
 };
 
 // -------------------------
 // Handling Sign Up Username
 // -------------------------
-id("signup-username").addEventListener("input", function () {
+$("signup-username").addEventListener("input", function () {
   const value = this.value;
 
   if (value.includes(" ")) {
@@ -66,7 +77,7 @@ checkFocus("signup-username", validation.username);
 // -------------------------
 // Handling Sign Up Email
 // -------------------------
-id("signup-email").addEventListener("input", function () {
+$("signup-email").addEventListener("input", function () {
   const value = this.value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -87,7 +98,7 @@ checkFocus("signup-email", validation.email);
 // Handling Sign Up Password
 // -------------------------
 
-id("signup-password").addEventListener("input", function () {
+$("signup-password").addEventListener("input", function () {
   const passwordRegex = /^(?=.*[^a-zA-Z0-9])\S{8,}$/;
 
   if (!passwordRegex.test(this.value)) {
@@ -117,12 +128,12 @@ checkFocus("signup-password", validation.password);
 // Handling Sign Up Password Confirm
 // ----------------------------------
 
-id("signup-confirm-password").addEventListener("input", function () {
+$("signup-confirm-password").addEventListener("input", function () {
   checkPassword();
 });
 
 function checkPassword() {
-  const confirmPassword = id("signup-confirm-password").value;
+  const confirmPassword = $("signup-confirm-password").value;
 
   if (
     validation.password.value !== confirmPassword &&
@@ -149,16 +160,49 @@ checkFocus("signup-confirm-password", validation.confirmPassword);
 // ----------------------------------
 // Handling password show or hide
 // ----------------------------------
-id("password-toggle").addEventListener("click", function () {
+$("password-toggle").addEventListener("click", function () {
   if (passwordToggle) {
-    id("signup-password").type = "password";
-    id("signup-confirm-password").type = "password";
+    $("signup-password").type = "password";
+    $("signup-confirm-password").type = "password";
 
     passwordToggle = false;
   } else {
-    id("signup-password").type = "text";
-    id("signup-confirm-password").type = "text";
+    $("signup-password").type = "text";
+    $("signup-confirm-password").type = "text";
 
     passwordToggle = true;
+  }
+});
+
+// -------------------------
+// Handling form
+// -------------------------
+
+$("form-signup").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  if (!validation.username.valid) {
+    return refocusHandler("signup-username");
+  } else if (!validation.email.valid) {
+    return refocusHandler("signup-email");
+  } else if (!validation.password.valid) {
+    return refocusHandler("signup-password");
+  } else if (!validation.confirmPassword.valid) {
+    return refocusHandler("signup-confirm-password");
+  }
+
+  const formData = new FormData($("form-signup"));
+
+  try {
+    const res = await fetch("", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    successfulHandler(data);
+  } catch (err) {
+    console.log("Something went wrong! Please try again.", err);
   }
 });
