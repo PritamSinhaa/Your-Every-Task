@@ -194,7 +194,7 @@ $("form-signup").addEventListener("submit", async function (e) {
   const formData = new FormData($("form-signup"));
 
   try {
-    const res = await fetch("", {
+    const res = await fetch("http://localhost:3000/api/auth/sign-up", {
       method: "POST",
       body: formData,
     });
@@ -206,14 +206,18 @@ $("form-signup").addEventListener("submit", async function (e) {
     console.log("Something went wrong! Please try again.", err);
   }
 });
+
+function successfulHandler(data) {
+  console.log(data);
+}
 // ----------------------------------
 // Toggling sign in and sign up
 // ----------------------------------
 
-let signUpBtn = id("toggle-signup");
-let signInBtn = id("toggle-signin");
-let signInForm = id("form-signin");
-let signUpForm = id("form-signup");
+let signUpBtn = $("toggle-signup");
+let signInBtn = $("toggle-signin");
+let signInForm = $("form-signin");
+let signUpForm = $("form-signup");
 
 signInBtn.addEventListener("click", () => {
   signUpForm.style.display = "none";
