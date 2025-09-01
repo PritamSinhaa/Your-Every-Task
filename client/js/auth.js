@@ -1,188 +1,245 @@
-const id = (name) => document.getElementById(name);
-let showPassword = false;
-let firstFocus = {
-  password: false,
+const $ = (id) => document.getElementById(id);
+
+// State
+let passwordToggle = false;
+
+const validation = {
+  username: { message: "", valid: false, firstFocus: true, focusOut: false },
+  email: { message: "", valid: false, firstFocus: true, focusOut: false },
+  password: {
+    message: "",
+    valid: false,
+    firstFocus: true,
+    focusOut: false,
+    value: "",
+  },
+  confirmPassword: {
+    message: "",
+    valid: false,
+    firstFocus: true,
+    focusOut: false,
+  },
 };
 
-let validUserName = {
-  message: "",
-  valid: false,
-};
-
-let validEmail = {
-  message: "",
-  valid: false,
-};
-
-let validPassword = {
-  message: "",
-  valid: false,
-  password: "",
-  hide: true,
-};
-
-let comfirmPassword = {
-  message: "",
-  valid: true,
-};
-
-// Validation username
-function userNameHandler() {
-  id("sign-up-username").textContent = validUserName.message;
-}
-
-id("user-id").addEventListener("input", function () {
-  const value = this.value;
-
-  if (value.includes(" ")) {
-    validUserName = {
-      message: "Space is not allow",
-      valid: false,
-    };
-
-    userNameHandler();
-  } else if (value.length < 3) {
-    validUserName = {
-      message: "User name much atleast 4 character",
-      valid: false,
-    };
-
-    userNameHandler();
-  } else {
-    validUserName = {
-      message: "Valid username",
-      valid: true,
-    };
-
-    userNameHandler();
-  }
-});
-
-// Validation email
-function emailHandler() {
-  id("sign-up-email").textContent = validEmail.message;
-}
-
-id("email-id").addEventListener("input", function () {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!regex.test(this.value)) {
-    validEmail = {
-      message: "Email not valid",
-      valid: false,
-    };
-
-    emailHandler();
-  } else {
-    validEmail = {
-      message: "Valid email",
-      valid: true,
-    };
-
-    emailHandler();
-  }
-});
-
-// Validation password
-function passwordHandler() {
-  id("sign-up-pass-error").textContent = validPassword.message;
-
-  if (firstFocus.password) {
-    comfirmPassword = {
-      message: "Password is not match",
-      valid: false,
-    };
-
-    confirmHandler();
-  }
-
-  id("pass-id").addEventListener("focus", function () {
-    firstFocus.password = true;
+// Checking focus in/out
+function checkFocus(fieldId, fieldState) {
+  $(fieldId).addEventListener("focusout", function () {
+    fieldState.firstFocus = false;
+    fieldState.focusOut = true;
+    $(fieldId).dispatchEvent(new Event("input"));
   });
 }
 
-id("pass-id").addEventListener("input", function () {
+// Handling error
+const errorHandler = (fieldId, fieldState, messageId) => {
+  $(messageId).textContent = fieldState.message;
+
+  if (!fieldState.valid && !fieldState.firstFocus && fieldState.focusOut) {
+    $(fieldId).style.border = "4px solid yellow";
+  } else {
+    $(fieldId).style.border = "none";
+  }
+};
+
+// Handling input refocus
+const refocusHandler = function (Fieldid) {
+  $(Fieldid).focus();
+};
+
+// Handling form summit response
+// TODO: Finished up later
+const responseHandler = (res) => {
+  console.log("Successfull ", res);
+};
+
+// -------------------------
+// Handling Sign Up Username
+// -------------------------
+$("signup-username").addEventListener("input", function () {
   const value = this.value;
-  const regex = /[^a-zA-Z0-9]/;
 
   if (value.includes(" ")) {
-    validPassword = {
-      message: "Space is not allow.",
-      valid: false,
-      password: value,
-    };
-  } else if (!(value.length >= 8 && regex.test(value))) {
-    validPassword = {
-      message: "Password much be contain 8 character with symbol",
-      valid: false,
-      password: value,
-    };
+    validation.username.message = "Spaces are not allowed";
+    validation.username.valid = false;
+  } else if (value.length < 3 && !validation.username.firstFocus) {
+    validation.username.message = "Username must be at least 3 characters";
+    validation.username.valid = false;
   } else {
-    validPassword = {
-      message: "Valid password",
-      valid: true,
-      password: value,
-    };
+    validation.username.message = "";
+    validation.username.valid = true;
   }
 
-  passwordHandler();
+  errorHandler("signup-username", validation.username, "error-signup-username");
 });
 
-// Confirm password
+checkFocus("signup-username", validation.username);
 
-function confirmHandler() {
-  id("sign-up-confirm-pass").textContent = comfirmPassword.message;
+// -------------------------
+// Handling Sign Up Email
+// -------------------------
+$("signup-email").addEventListener("input", function () {
+  const value = this.value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(value) && !validation.email.firstFocus) {
+    validation.email.message = "Invalid email address";
+    validation.email.valid = false;
+  } else {
+    validation.email.message = "";
+    validation.email.valid = true;
+  }
+
+  errorHandler("signup-email", validation.email, "error-signup-email");
+});
+
+checkFocus("signup-email", validation.email);
+
+// -------------------------
+// Handling Sign Up Password
+// -------------------------
+
+$("signup-password").addEventListener("input", function () {
+  const passwordRegex = /^(?=.*[^a-zA-Z0-9])\S{8,}$/;
+
+  if (!passwordRegex.test(this.value)) {
+    if (this.value.includes(" ")) {
+      validation.password.message = "Spaces are not allowed";
+    } else if (this.value.length < 8) {
+      validation.password.message = "Password must be at least 8 characters";
+    } else {
+      validation.password.message = "Password must include a symbol";
+    }
+
+    validation.password.valid = false;
+  } else {
+    validation.password.message = "";
+    validation.password.valid = true;
+  }
+
+  validation.password.value = this.value;
+
+  errorHandler("signup-password", validation.password, "error-signup-password");
+  checkPassword();
+});
+
+checkFocus("signup-password", validation.password);
+
+// ----------------------------------
+// Handling Sign Up Password Confirm
+// ----------------------------------
+
+$("signup-confirm-password").addEventListener("input", function () {
+  checkPassword();
+});
+
+function checkPassword() {
+  const confirmPassword = $("signup-confirm-password").value;
+
+  if (
+    validation.password.value !== confirmPassword &&
+    !validation.confirmPassword.firstFocus
+  ) {
+    validation.confirmPassword.message = "Password is not match";
+    validation.confirmPassword.valid = false;
+  }
+
+  if (validation.password.value === confirmPassword) {
+    validation.confirmPassword.message = "";
+    validation.confirmPassword.valid = true;
+  }
+
+  errorHandler(
+    "signup-confirm-password",
+    validation.confirmPassword,
+    "error-signup-confirm-password"
+  );
 }
 
-id("confirm-id").addEventListener("input", function () {
-  if (validPassword.password !== this.value) {
-    comfirmPassword = {
-      message: "Password is not match.",
-      valid: false,
-    };
-  } else {
-    comfirmPassword = {
-      message: "Password is match",
-    };
-  }
+checkFocus("signup-confirm-password", validation.confirmPassword);
 
-  confirmHandler();
-});
+// ----------------------------------
+// Handling password show or hide
+// ----------------------------------
+$("password-toggle").addEventListener("click", function () {
+  if (passwordToggle) {
+    $("signup-password").type = "password";
+    $("signup-confirm-password").type = "password";
 
-// Handling the password hide and show
-id("password-show").addEventListener("click", function () {
-  if (!showPassword) {
-    id("pass-id").type = "text";
-    id("confirm-id").type = "text";
-    showPassword = true;
+    passwordToggle = false;
   } else {
-    id("pass-id").type = "password";
-    id("confirm-id").type = "password";
-    showPassword = false;
+    $("signup-password").type = "text";
+    $("signup-confirm-password").type = "text";
+
+    passwordToggle = true;
   }
 });
 
-// TODO: This is not complete yet
-// Form submittion
-const formSubmittion = (e) => {
+// -------------------------
+// Handling form
+// -------------------------
+
+$("form-signup").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const formData = new FormData(id("form"));
-
-  if (validUserName.valid && validEmail.valid && validPassword.valid) {
-    authSubmit(formData);
+  if (!validation.username.valid) {
+    return refocusHandler("signup-username");
+  } else if (!validation.email.valid) {
+    return refocusHandler("signup-email");
+  } else if (!validation.password.valid) {
+    return refocusHandler("signup-password");
+  } else if (!validation.confirmPassword.valid) {
+    return refocusHandler("signup-confirm-password");
   }
-};
 
-// TODO: This is not complete yet
-// Passing to backend
-const authSubmit = async (formData) => {
+  const formData = new FormData($("form-signup"));
+
   try {
-    await fetch("/auth/sign-up", {
-      type: "POST",
+    const res = await fetch("", {
+      method: "POST",
       body: formData,
     });
+
+    const data = await res.json();
+
+    successfulHandler(data);
   } catch (err) {
-    // FIXME: Pass to user this error
+    console.log("Something went wrong! Please try again.", err);
   }
-};
+});
+// ----------------------------------
+// Toggling sign in and sign up
+// ----------------------------------
+
+let signUpBtn = id("toggle-signup");
+let signInBtn = id("toggle-signin");
+let signInForm = id("form-signin");
+let signUpForm = id("form-signup");
+
+signInBtn.addEventListener("click", () => {
+  signUpForm.style.display = "none";
+  signInForm.style.display = "flex";
+  signInForm.style.display = "flex";
+  signUpBtn.style.width = "45%";
+  signUpBtn.style.color = "var(--color-PrimaryText)";
+  signUpBtn.style.backgroundColor = "var(--color-LiteBg1)";
+  signUpBtn.style.borderRadius = "0 0 1.6rem 0";
+
+  signInBtn.style.color = "var(--color-Input)";
+  signInBtn.style.backgroundColor = "var(--color-BtnBg)";
+  signInBtn.style.width = "55%";
+  signInBtn.style.borderRadius = "1.6rem 0 0 0";
+});
+
+signUpBtn.addEventListener("click", () => {
+  signUpForm.style.display = "flex";
+  signInForm.style.display = "none";
+  signUpBtn.style.width = "55%";
+  signUpBtn.style.color = "var(--color-Input)";
+  signUpBtn.style.backgroundColor = "var(--color-BtnBg)";
+  signUpBtn.style.borderRadius = "0 1.6rem 0 0";
+
+  signInBtn.style.color = "var(--color-PrimaryText)";
+  signInBtn.style.backgroundColor = "var(--color-LiteBg1)";
+  signInBtn.style.width = "45%";
+  signInBtn.style.borderRadius = "0 0 0 1.6rem";
+});
