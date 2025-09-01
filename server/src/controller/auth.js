@@ -5,12 +5,16 @@ const User = require("../model/user");
 // Sign up controller
 
 exports.signUp = async (req, res) => {
-  const { name, password } = req.body;
+  const { signupUsername, signupEmail, signupPassword } = req.body;
 
-  const hashPassword = await bcrypt.hash(password, 12);
+  const hashPassword = await bcrypt.hash(signupPassword, 12);
 
   try {
-    const newUser = new User({ name, password: hashPassword });
+    const newUser = new User({
+      userName: signupUsername,
+      email: signupEmail,
+      password: hashPassword,
+    });
     await newUser.save();
 
     res.status(201).json({ message: "Signup successful!" });
