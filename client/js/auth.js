@@ -167,10 +167,10 @@ id("password-toggle").addEventListener("click", function () {
 // Toggling sign in and sign up
 // ----------------------------------
 
-let signUpBtn = document.getElementById("toggle-signup");
-let signInBtn = document.getElementById("toggle-signin");
-let signInForm = document.getElementById("form-signin");
-let signUpForm = document.getElementById("form-signup");
+let signUpBtn = id("toggle-signup");
+let signInBtn = id("toggle-signin");
+let signInForm = id("form-signin");
+let signUpForm = id("form-signup");
 
 signInBtn.addEventListener("click", () => {
   signUpForm.style.display = "none";
