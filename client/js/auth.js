@@ -206,3 +206,40 @@ $("form-signup").addEventListener("submit", async function (e) {
     console.log("Something went wrong! Please try again.", err);
   }
 });
+// ----------------------------------
+// Toggling sign in and sign up
+// ----------------------------------
+
+let signUpBtn = id("toggle-signup");
+let signInBtn = id("toggle-signin");
+let signInForm = id("form-signin");
+let signUpForm = id("form-signup");
+
+signInBtn.addEventListener("click", () => {
+  signUpForm.style.display = "none";
+  signInForm.style.display = "flex";
+  signInForm.style.display = "flex";
+  signUpBtn.style.width = "45%";
+  signUpBtn.style.color = "var(--color-PrimaryText)";
+  signUpBtn.style.backgroundColor = "var(--color-LiteBg1)";
+  signUpBtn.style.borderRadius = "0 0 1.6rem 0";
+
+  signInBtn.style.color = "var(--color-Input)";
+  signInBtn.style.backgroundColor = "var(--color-BtnBg)";
+  signInBtn.style.width = "55%";
+  signInBtn.style.borderRadius = "1.6rem 0 0 0";
+});
+
+signUpBtn.addEventListener("click", () => {
+  signUpForm.style.display = "flex";
+  signInForm.style.display = "none";
+  signUpBtn.style.width = "55%";
+  signUpBtn.style.color = "var(--color-Input)";
+  signUpBtn.style.backgroundColor = "var(--color-BtnBg)";
+  signUpBtn.style.borderRadius = "0 1.6rem 0 0";
+
+  signInBtn.style.color = "var(--color-PrimaryText)";
+  signInBtn.style.backgroundColor = "var(--color-LiteBg1)";
+  signInBtn.style.width = "45%";
+  signInBtn.style.borderRadius = "0 0 0 1.6rem";
+});
