@@ -252,10 +252,22 @@ body {
   transform: scale(1.05);
 }
 /* Display enable and disable */
-.password-display {
+
+.enable-display {
   display: none;
 }
 
-.user-name-display {
-  display: none;
+/* Toggle signup and signin */
+.signin-btn {
+  background-color: var(--color-BtnBg) !important;
+  width: 55% !important;
+  color: var(--color-Input);
+  border-radius: 1.6rem 0rem 0rem 0rem !important;
+}
+
+.signup-btn {
+  width: 45% !important;
+  background-color: var(--color-LiteBg1) !important;
+  border-radius: 0 0rem 1.6rem 0 !important;
+  color: var(--color-PrimaryText) !important;
 }
