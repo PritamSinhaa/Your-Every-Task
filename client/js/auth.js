@@ -2,6 +2,7 @@ const $ = (id) => document.getElementById(id);
 
 // State
 let passwordToggle = false;
+let signin = false;
 
 const validation = {
   username: { message: "", valid: false, firstFocus: true, focusOut: false },
@@ -79,6 +80,7 @@ checkFocus("signup-username", validation.username);
 // -------------------------
 $("signup-email").addEventListener("input", function () {
   const value = this.value.trim();
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailRegex.test(value) && !validation.email.firstFocus) {
@@ -175,7 +177,7 @@ $("password-toggle").addEventListener("click", function () {
 });
 
 // -------------------------
-// Handling form
+// Handling sign up form
 // -------------------------
 
 $("form-signup").addEventListener("submit", async function (e) {
@@ -210,40 +212,22 @@ $("form-signup").addEventListener("submit", async function (e) {
 function successfulHandler(data) {
   console.log(data);
 }
-// ----------------------------------
-// Toggling sign in and sign up
-// ----------------------------------
 
-let signUpBtn = $("toggle-signup");
-let signInBtn = $("toggle-signin");
-let signInForm = $("form-signin");
-let signUpForm = $("form-signup");
+// -------------------------
+// Handling sign in button
+// -------------------------
+$("toggle-signin").addEventListener("click", function () {
+  $("username-container").classList.add("enable-display");
+  $("confirm-password-container").classList.add("enable-display");
 
-signInBtn.addEventListener("click", () => {
-  signUpForm.style.display = "none";
-  signInForm.style.display = "flex";
-  signInForm.style.display = "flex";
-  signUpBtn.style.width = "45%";
-  signUpBtn.style.color = "var(--color-PrimaryText)";
-  signUpBtn.style.backgroundColor = "var(--color-LiteBg1)";
-  signUpBtn.style.borderRadius = "0 0 1.6rem 0";
-
-  signInBtn.style.color = "var(--color-Input)";
-  signInBtn.style.backgroundColor = "var(--color-BtnBg)";
-  signInBtn.style.width = "55%";
-  signInBtn.style.borderRadius = "1.6rem 0 0 0";
+  $("toggle-signin").classList.add("signin-btn");
+  $("toggle-signup").classList.add("signup-btn");
 });
 
-signUpBtn.addEventListener("click", () => {
-  signUpForm.style.display = "flex";
-  signInForm.style.display = "none";
-  signUpBtn.style.width = "55%";
-  signUpBtn.style.color = "var(--color-Input)";
-  signUpBtn.style.backgroundColor = "var(--color-BtnBg)";
-  signUpBtn.style.borderRadius = "0 1.6rem 0 0";
+$("toggle-signup").addEventListener("click", function () {
+  $("username-container").classList.remove("enable-display");
+  $("confirm-password-container").classList.remove("enable-display");
 
-  signInBtn.style.color = "var(--color-PrimaryText)";
-  signInBtn.style.backgroundColor = "var(--color-LiteBg1)";
-  signInBtn.style.width = "45%";
-  signInBtn.style.borderRadius = "0 0 0 1.6rem";
+  $("toggle-signin").classList.remove("signin-btn");
+  $("toggle-signup").classList.remove("signup-btn");
 });

@@ -37,13 +37,13 @@ exports.signUp = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   try {
-    const { name, password } = req.body;
+    const { signinEmail, signinPassword } = req.body;
 
-    const user = await User.findOne({ name });
+    const user = await User.findOne({ email: signinEmail });
 
     if (!user) return res.status(400).json({ message: "User not found!" });
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(signinPassword, user.password);
 
     if (!passwordMatch)
       return res.status(400).json({ message: "Invalid password" });
