@@ -247,6 +247,15 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
 .forgot-password:hover {
   transform: scale(1.05);
+}
+/* Display enable and disable */
+.password-display {
+  display: none;
+}
+
+.user-name-display {
+  display: none;
 }
