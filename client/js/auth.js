@@ -2,6 +2,7 @@ const $ = (id) => document.getElementById(id);
 
 // State
 let passwordToggle = false;
+let signin = false;
 
 const validation = {
   username: { message: "", valid: false, firstFocus: true, focusOut: false },
@@ -211,3 +212,22 @@ $("form-signup").addEventListener("submit", async function (e) {
 function successfulHandler(data) {
   console.log(data);
 }
+
+// -------------------------
+// Handling sign in button
+// -------------------------
+$("toggle-signin").addEventListener("click", function () {
+  $("username-container").classList.add("enable-display");
+  $("confirm-password-container").classList.add("enable-display");
+
+  $("toggle-signin").classList.add("signin-btn");
+  $("toggle-signup").classList.add("signup-btn");
+});
+
+$("toggle-signup").addEventListener("click", function () {
+  $("username-container").classList.remove("enable-display");
+  $("confirm-password-container").classList.remove("enable-display");
+
+  $("toggle-signin").classList.remove("signin-btn");
+  $("toggle-signup").classList.remove("signup-btn");
+});
