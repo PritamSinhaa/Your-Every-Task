@@ -52,21 +52,6 @@ const responseHandler = (res) => {
   console.log("Successfull ", res);
 };
 
-// Checking email is valid or not
-function checkEmail(inputId, errOutId, value) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!emailRegex.test(value) && !validation.email.firstFocus) {
-    validation.email.message = "Invalid email address";
-    validation.email.valid = false;
-  } else {
-    validation.email.message = "";
-    validation.email.valid = true;
-  }
-
-  errorHandler(inputId, validation.email, errOutId);
-}
-
 // -------------------------
 // Handling Sign Up Username
 // -------------------------
@@ -95,7 +80,17 @@ checkFocus("signup-username", validation.username);
 $("signup-email").addEventListener("input", function () {
   const value = this.value.trim();
 
-  checkEmail("signup-email", "error-signup-email", value);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(value) && !validation.email.firstFocus) {
+    validation.email.message = "Invalid email address";
+    validation.email.valid = false;
+  } else {
+    validation.email.message = "";
+    validation.email.valid = true;
+  }
+
+  errorHandler("signup-email", validation.email, "error-signup-email");
 });
 
 checkFocus("signup-email", validation.email);
@@ -216,54 +211,3 @@ $("form-signup").addEventListener("submit", async function (e) {
 function successfulHandler(data) {
   console.log(data);
 }
-
-// ----------------------------------
-// Handling sign in form
-// ----------------------------------
-$("form-signin").addEventListener("submit", function (e) {
-  e.preventDefault();
-});
-
-$("signin-email").addEventListener("input", function () {
-  const v = this.value.trim();
-
-  checkEmail("signin-email", "error-signin-email", v);
-});
-
-// ----------------------------------
-// Toggling sign in and sign up
-// ----------------------------------
-
-let signUpBtn = $("toggle-signup");
-let signInBtn = $("toggle-signin");
-let signInForm = $("form-signin");
-let signUpForm = $("form-signup");
-
-signInBtn.addEventListener("click", () => {
-  signUpForm.style.display = "none";
-  signInForm.style.display = "flex";
-  signInForm.style.display = "flex";
-  signUpBtn.style.width = "45%";
-  signUpBtn.style.color = "var(--color-PrimaryText)";
-  signUpBtn.style.backgroundColor = "var(--color-LiteBg1)";
-  signUpBtn.style.borderRadius = "0 0 1.6rem 0";
-
-  signInBtn.style.color = "var(--color-Input)";
-  signInBtn.style.backgroundColor = "var(--color-BtnBg)";
-  signInBtn.style.width = "55%";
-  signInBtn.style.borderRadius = "1.6rem 0 0 0";
-});
-
-signUpBtn.addEventListener("click", () => {
-  signUpForm.style.display = "flex";
-  signInForm.style.display = "none";
-  signUpBtn.style.width = "55%";
-  signUpBtn.style.color = "var(--color-Input)";
-  signUpBtn.style.backgroundColor = "var(--color-BtnBg)";
-  signUpBtn.style.borderRadius = "0 1.6rem 0 0";
-
-  signInBtn.style.color = "var(--color-PrimaryText)";
-  signInBtn.style.backgroundColor = "var(--color-LiteBg1)";
-  signInBtn.style.width = "45%";
-  signInBtn.style.borderRadius = "0 0 0 1.6rem";
-});
