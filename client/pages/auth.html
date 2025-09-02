@@ -50,7 +50,7 @@
         </div>
 
         <!-- Password -->
-        <div class="form-group">
+        <div class="form-group user-name-display">
           <label for="signup-password" class="form-label">Password</label>
           <input
             type="password"
@@ -70,7 +70,7 @@
         </div>
 
         <!-- Confirm Password -->
-        <div class="form-group">
+        <div class="form-group confirm-password-display">
           <label for="signup-confirm-password" class="form-label"
             >Confirm password</label
           >
@@ -111,74 +111,7 @@
           </div>
         </div>
       </form>
-
-      <!-- Sign In Form -->
-      <form id="form-signin" action="#" class="form form-signin">
-        <!-- Email -->
-        <div class="form-group">
-          <label for="signin-email" class="form-label">Email</label>
-          <input
-            id="signin-email"
-            type="email"
-            class="form-input"
-            name="signinEmail"
-            placeholder="Enter your email id"
-          />
-          <p id="error-signin-email" class="form-error"></p>
-        </div>
-
-        <!-- Password -->
-        <div class="form-group">
-          <label for="signin-password" class="form-label">Password</label>
-          <input
-            id="signin-password"
-            type="password"
-            class="form-input"
-            name="signinPassword"
-            maxlength="16"
-            minlength="8"
-            placeholder="Enter password"
-          />
-          <a class="forgot-password" href="#">Forgot Password?</a>
-          <p id="error-signin-password" class="form-error"></p>
-          <p id="password-toggle" class="password-toggle">
-            <img
-              src="../assets/icons/eyes.svg"
-              alt="Show Password"
-              class="icon-show-password"
-            />
-          </p>
-        </div>
-
-        <!-- Sign In Button -->
-        <div class="form-action">
-          <button id="btn-signin" type="submit" class="btn-submit">
-            Sign In
-          </button>
-        </div>
-
-        <!-- Social Login -->
-        <div class="social-login">
-          <div class="divider">
-            <div class="line"></div>
-            <div class="divider-text">Or sign in with</div>
-            <div class="line"></div>
-          </div>
-          <div class="social-options">
-            <a href="#" id="signin-apple" class="social-btn">
-              <img src="../assets/icons/apple.png" alt="Apple" />
-            </a>
-            <a href="#" id="signin-google" class="social-btn">
-              <img src="../assets/icons/google.png" alt="Google" />
-            </a>
-            <a href="#" id="signin-facebook" class="social-btn">
-              <img src="../assets/icons/facebook.png" alt="Facebook" />
-            </a>
-          </div>
-        </div>
-      </form>
     </div>
-
     <script src="../js/auth.js"></script>
   </body>
 </html>
