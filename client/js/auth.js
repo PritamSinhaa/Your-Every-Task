@@ -52,6 +52,21 @@ const responseHandler = (res) => {
   console.log("Successfull ", res);
 };
 
+// Checking email is valid or not
+function checkEmail(inputId, errOutId, value) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(value) && !validation.email.firstFocus) {
+    validation.email.message = "Invalid email address";
+    validation.email.valid = false;
+  } else {
+    validation.email.message = "";
+    validation.email.valid = true;
+  }
+
+  errorHandler(inputId, validation.email, errOutId);
+}
+
 // -------------------------
 // Handling Sign Up Username
 // -------------------------
@@ -79,17 +94,8 @@ checkFocus("signup-username", validation.username);
 // -------------------------
 $("signup-email").addEventListener("input", function () {
   const value = this.value.trim();
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!emailRegex.test(value) && !validation.email.firstFocus) {
-    validation.email.message = "Invalid email address";
-    validation.email.valid = false;
-  } else {
-    validation.email.message = "";
-    validation.email.valid = true;
-  }
-
-  errorHandler("signup-email", validation.email, "error-signup-email");
+  checkEmail("signup-email", "error-signup-email", value);
 });
 
 checkFocus("signup-email", validation.email);
@@ -175,7 +181,7 @@ $("password-toggle").addEventListener("click", function () {
 });
 
 // -------------------------
-// Handling form
+// Handling sign up form
 // -------------------------
 
 $("form-signup").addEventListener("submit", async function (e) {
@@ -210,6 +216,20 @@ $("form-signup").addEventListener("submit", async function (e) {
 function successfulHandler(data) {
   console.log(data);
 }
+
+// ----------------------------------
+// Handling sign in form
+// ----------------------------------
+$("form-signin").addEventListener("submit", function (e) {
+  e.preventDefault();
+});
+
+$("signin-email").addEventListener("input", function () {
+  const v = this.value.trim();
+
+  checkEmail("signin-email", "error-signin-email", v);
+});
+
 // ----------------------------------
 // Toggling sign in and sign up
 // ----------------------------------
