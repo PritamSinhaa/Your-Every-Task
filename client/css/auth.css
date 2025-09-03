@@ -73,6 +73,7 @@ body {
   margin: 30px auto;
   border: 1px solid rgba(169, 162, 162, 0.3);
   border-radius: 0.8rem;
+  position: relative;
 }
 
 /* Toggle */
@@ -125,7 +126,7 @@ body {
   flex-direction: column;
   padding: 18px 24px;
 }
-.form-signup {
+.auth-form {
   display: flex;
 }
 .form-signin {
@@ -247,6 +248,65 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
 .forgot-password:hover {
   transform: scale(1.05);
+}
+/* Display enable and disable */
+
+.enable-display {
+  display: none;
+}
+
+/* Toggle signup and signin */
+.signin-btn {
+  background-color: var(--color-BtnBg) !important;
+  width: 55% !important;
+  color: var(--color-Input);
+  border-radius: 1.6rem 0rem 0rem 0rem !important;
+}
+
+.signup-btn {
+  width: 45% !important;
+  background-color: var(--color-LiteBg1) !important;
+  border-radius: 0 0rem 1.6rem 0 !important;
+  color: var(--color-PrimaryText) !important;
+}
+
+/* alert container */
+
+#alert-container {
+  background-color: var(--color-LiteBg1);
+  border-radius: 16px;
+  min-height: 100px;
+  padding: 24px;
+  width: 370px;
+  margin: 0 auto;
+  position: absolute;
+  top: 200px;
+  left: 15px;
+  font-size: 1.3rem;
+  display: none;
+
+}
+
+#alert{
+  width: 330px;
+}
+#cancel{
+  background-color: transparent;
+  position: absolute;
+  top: 27px;
+  right: 20px;
+  border: none;
+  
+}
+#cancel img{
+  width: 26px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#cancel img:hover{
+  transform: scale(1.2);
 }

@@ -5,12 +5,16 @@ const User = require("../model/user");
 // Sign up controller
 
 exports.signUp = async (req, res) => {
-  const { name, password } = req.body;
+  const { username, email, password } = req.body;
 
   const hashPassword = await bcrypt.hash(password, 12);
 
   try {
-    const newUser = new User({ name, password: hashPassword });
+    const newUser = new User({
+      userName: username,
+      email: email,
+      password: hashPassword,
+    });
     await newUser.save();
 
     res.status(201).json({ message: "Signup successful!" });
@@ -33,13 +37,15 @@ exports.signUp = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   try {
-    const { name, password } = req.body;
+    const { signinEmail, signinPassword } = req.body;
 
-    const user = await User.findOne({ name });
+    console.log(signinEmail);
+
+    const user = await User.findOne({ email: signinEmail });
 
     if (!user) return res.status(400).json({ message: "User not found!" });
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(signinPassword, user.password);
 
     if (!passwordMatch)
       return res.status(400).json({ message: "Invalid password" });
