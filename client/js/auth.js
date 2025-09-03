@@ -2,7 +2,6 @@ const $ = (id) => document.getElementById(id);
 
 // State
 let passwordToggle = false;
-let signin = false;
 
 const validation = {
   username: { message: "", valid: false, firstFocus: true, focusOut: false },
@@ -183,23 +182,32 @@ $("password-toggle").addEventListener("click", function () {
 $("form-signup").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  if (!validation.username.valid) {
+  let res;
+  const formData = new FormData($("form-signup"));
+  const submitBtn = $("btn-signup").value;
+
+  if (!validation.username.valid && submitBtn === "signup") {
     return refocusHandler("signup-username");
   } else if (!validation.email.valid) {
     return refocusHandler("signup-email");
   } else if (!validation.password.valid) {
     return refocusHandler("signup-password");
-  } else if (!validation.confirmPassword.valid) {
+  } else if (!validation.confirmPassword.valid && submitBtn === "signup") {
     return refocusHandler("signup-confirm-password");
   }
 
-  const formData = new FormData($("form-signup"));
-
   try {
-    const res = await fetch("http://localhost:3000/api/auth/sign-up", {
-      method: "POST",
-      body: formData,
-    });
+    if (submitBtn === "signup") {
+      res = await fetch("http://localhost:3000/api/auth/sign-up", {
+        method: "POST",
+        body: formData,
+      });
+    } else if (submitBtn === "signin") {
+      res = await fetch("http://localhost:3000/api/auth/sign-in", {
+        method: "POST",
+        body: formData,
+      });
+    }
 
     const data = await res.json();
 
@@ -222,6 +230,9 @@ $("toggle-signin").addEventListener("click", function () {
 
   $("toggle-signin").classList.add("signin-btn");
   $("toggle-signup").classList.add("signup-btn");
+
+  $("btn-signup").textContent = "Sign in";
+  $("btn-signup").value = "signin";
 });
 
 $("toggle-signup").addEventListener("click", function () {
@@ -230,4 +241,7 @@ $("toggle-signup").addEventListener("click", function () {
 
   $("toggle-signin").classList.remove("signin-btn");
   $("toggle-signup").classList.remove("signup-btn");
+
+  $("btn-signup").textContent = "Sign up";
+  $("btn-signup").value = "signup";
 });
