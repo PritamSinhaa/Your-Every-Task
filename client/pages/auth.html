@@ -22,41 +22,41 @@
       </div>
 
       <!-- Sign Up Form -->
-      <form id="form-signup" action="#" class="form form-signup">
+      <form id="auth-form" action="#" class="form auth-form">
         <!-- Username -->
         <div id="username-container" class="form-group">
-          <label for="signup-username" class="form-label">Username</label>
+          <label for="username" class="form-label">Username</label>
           <input
             type="text"
-            id="signup-username"
+            id="username"
             class="form-input"
-            name="signupUsername"
+            name="username"
             placeholder="Enter username"
           />
-          <p id="error-signup-username" class="form-error"></p>
+          <p id="error-username" class="form-error"></p>
         </div>
 
         <!-- Email -->
         <div class="form-group">
-          <label for="signup-email" class="form-label">Email</label>
+          <label for="email" class="form-label">Email</label>
           <input
             type="text"
-            id="signup-email"
+            id="email"
             class="form-input"
-            name="signupEmail"
+            name="email"
             placeholder="Enter your email id"
           />
-          <p id="error-signup-email" class="form-error"></p>
+          <p id="error-email" class="form-error"></p>
         </div>
 
         <!-- Password -->
         <div class="form-group">
-          <label for="signup-password" class="form-label">Password</label>
+          <label for="password" class="form-label">Password</label>
           <input
             type="password"
-            id="signup-password"
+            id="password"
             class="form-input"
-            name="signupPassword"
+            name="password"
             placeholder="Enter password"
           />
           <aside id="password-toggle" class="password-toggle">
@@ -66,27 +66,32 @@
               class="icon-show-password"
             />
           </aside>
-          <p id="error-signup-password" class="form-error"></p>
+          <p id="error-password" class="form-error"></p>
         </div>
 
         <!-- Confirm Password -->
         <div id="confirm-password-container" class="form-group">
-          <label for="signup-confirm-password" class="form-label"
+          <label for="confirm-password" class="form-label"
             >Confirm password</label
           >
           <input
             type="password"
-            id="signup-confirm-password"
+            id="confirm-password"
             class="form-input"
-            name="signupComfirmPassword"
+            name="confirmPassword"
             placeholder="Confirm password"
           />
-          <p id="error-signup-confirm-password" class="form-error"></p>
+          <p id="error-confirm-password" class="form-error"></p>
         </div>
 
         <!-- Sign Up Button -->
         <div class="form-action">
-          <button id="btn-signup" type="submit" class="btn-submit">
+          <button
+            id="btn-submit"
+            value="signup"
+            type="submit"
+            class="btn-submit"
+          >
             Sign Up
           </button>
         </div>

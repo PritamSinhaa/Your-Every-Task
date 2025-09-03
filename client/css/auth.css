@@ -125,7 +125,7 @@ body {
   flex-direction: column;
   padding: 18px 24px;
 }
-.form-signup {
+.auth-form {
   display: flex;
 }
 .form-signin {

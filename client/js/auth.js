@@ -2,7 +2,6 @@ const $ = (id) => document.getElementById(id);
 
 // State
 let passwordToggle = false;
-let signin = false;
 
 const validation = {
   username: { message: "", valid: false, firstFocus: true, focusOut: false },
@@ -56,7 +55,7 @@ const responseHandler = (res) => {
 // -------------------------
 // Handling Sign Up Username
 // -------------------------
-$("signup-username").addEventListener("input", function () {
+$("username").addEventListener("input", function () {
   const value = this.value;
 
   if (value.includes(" ")) {
@@ -70,15 +69,15 @@ $("signup-username").addEventListener("input", function () {
     validation.username.valid = true;
   }
 
-  errorHandler("signup-username", validation.username, "error-signup-username");
+  errorHandler("username", validation.username, "error-username");
 });
 
-checkFocus("signup-username", validation.username);
+checkFocus("username", validation.username);
 
 // -------------------------
 // Handling Sign Up Email
 // -------------------------
-$("signup-email").addEventListener("input", function () {
+$("email").addEventListener("input", function () {
   const value = this.value.trim();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -91,16 +90,16 @@ $("signup-email").addEventListener("input", function () {
     validation.email.valid = true;
   }
 
-  errorHandler("signup-email", validation.email, "error-signup-email");
+  errorHandler("email", validation.email, "error-email");
 });
 
-checkFocus("signup-email", validation.email);
+checkFocus("email", validation.email);
 
 // -------------------------
 // Handling Sign Up Password
 // -------------------------
 
-$("signup-password").addEventListener("input", function () {
+$("password").addEventListener("input", function () {
   const passwordRegex = /^(?=.*[^a-zA-Z0-9])\S{8,}$/;
 
   if (!passwordRegex.test(this.value)) {
@@ -120,22 +119,22 @@ $("signup-password").addEventListener("input", function () {
 
   validation.password.value = this.value;
 
-  errorHandler("signup-password", validation.password, "error-signup-password");
+  errorHandler("password", validation.password, "error-password");
   checkPassword();
 });
 
-checkFocus("signup-password", validation.password);
+checkFocus("password", validation.password);
 
 // ----------------------------------
 // Handling Sign Up Password Confirm
 // ----------------------------------
 
-$("signup-confirm-password").addEventListener("input", function () {
+$("confirm-password").addEventListener("input", function () {
   checkPassword();
 });
 
 function checkPassword() {
-  const confirmPassword = $("signup-confirm-password").value;
+  const confirmPassword = $("confirm-password").value;
 
   if (
     validation.password.value !== confirmPassword &&
@@ -151,26 +150,26 @@ function checkPassword() {
   }
 
   errorHandler(
-    "signup-confirm-password",
+    "confirm-password",
     validation.confirmPassword,
-    "error-signup-confirm-password"
+    "error-confirm-password"
   );
 }
 
-checkFocus("signup-confirm-password", validation.confirmPassword);
+checkFocus("confirm-password", validation.confirmPassword);
 
 // ----------------------------------
 // Handling password show or hide
 // ----------------------------------
 $("password-toggle").addEventListener("click", function () {
   if (passwordToggle) {
-    $("signup-password").type = "password";
-    $("signup-confirm-password").type = "password";
+    $("password").type = "password";
+    $("confirm-password").type = "password";
 
     passwordToggle = false;
   } else {
-    $("signup-password").type = "text";
-    $("signup-confirm-password").type = "text";
+    $("password").type = "text";
+    $("confirm-password").type = "text";
 
     passwordToggle = true;
   }
@@ -180,26 +179,35 @@ $("password-toggle").addEventListener("click", function () {
 // Handling sign up form
 // -------------------------
 
-$("form-signup").addEventListener("submit", async function (e) {
+$("auth-form").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  if (!validation.username.valid) {
-    return refocusHandler("signup-username");
+  let res;
+  const formData = new FormData($("auth-form"));
+  const submitBtn = $("btn-submit").value;
+
+  if (!validation.username.valid && submitBtn === "signup") {
+    return refocusHandler("username");
   } else if (!validation.email.valid) {
-    return refocusHandler("signup-email");
+    return refocusHandler("email");
   } else if (!validation.password.valid) {
-    return refocusHandler("signup-password");
-  } else if (!validation.confirmPassword.valid) {
-    return refocusHandler("signup-confirm-password");
+    return refocusHandler("password");
+  } else if (!validation.confirmPassword.valid && submitBtn === "signup") {
+    return refocusHandler("confirm-password");
   }
 
-  const formData = new FormData($("form-signup"));
-
   try {
-    const res = await fetch("http://localhost:3000/api/auth/sign-up", {
-      method: "POST",
-      body: formData,
-    });
+    if (submitBtn === "signup") {
+      res = await fetch("http://localhost:3000/api/auth/sign-up", {
+        method: "POST",
+        body: formData,
+      });
+    } else if (submitBtn === "signin") {
+      res = await fetch("http://localhost:3000/api/auth/sign-in", {
+        method: "POST",
+        body: formData,
+      });
+    }
 
     const data = await res.json();
 
@@ -214,7 +222,7 @@ function successfulHandler(data) {
 }
 
 // -------------------------
-// Handling sign in button
+// Handling form submit button
 // -------------------------
 $("toggle-signin").addEventListener("click", function () {
   $("username-container").classList.add("enable-display");
@@ -222,6 +230,9 @@ $("toggle-signin").addEventListener("click", function () {
 
   $("toggle-signin").classList.add("signin-btn");
   $("toggle-signup").classList.add("signup-btn");
+
+  $("btn-submit").textContent = "Sign in";
+  $("btn-submit").value = "signin";
 });
 
 $("toggle-signup").addEventListener("click", function () {
@@ -230,4 +241,7 @@ $("toggle-signup").addEventListener("click", function () {
 
   $("toggle-signin").classList.remove("signin-btn");
   $("toggle-signup").classList.remove("signup-btn");
+
+  $("btn-submit").textContent = "Sign up";
+  $("btn-submit").value = "signup";
 });
