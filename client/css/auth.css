@@ -73,6 +73,7 @@ body {
   margin: 30px auto;
   border: 1px solid rgba(169, 162, 162, 0.3);
   border-radius: 0.8rem;
+  position: relative;
 }
 
 /* Toggle */
@@ -270,4 +271,42 @@ body {
   background-color: var(--color-LiteBg1) !important;
   border-radius: 0 0rem 1.6rem 0 !important;
   color: var(--color-PrimaryText) !important;
+}
+
+/* alert container */
+
+#alert-container {
+  background-color: var(--color-LiteBg1);
+  border-radius: 16px;
+  min-height: 100px;
+  padding: 24px;
+  width: 370px;
+  margin: 0 auto;
+  position: absolute;
+  top: 200px;
+  left: 15px;
+  font-size: 1.3rem;
+  display: none;
+
+}
+
+#alert{
+  width: 330px;
+}
+#cancel{
+  background-color: transparent;
+  position: absolute;
+  top: 27px;
+  right: 20px;
+  border: none;
+  
+}
+#cancel img{
+  width: 26px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#cancel img:hover{
+  transform: scale(1.2);
 }
