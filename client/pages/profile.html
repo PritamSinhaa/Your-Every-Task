@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+</head>
+<body>
+    <div id="profile-container">
+
+     
+        <!-- form body  -->
+
+           <!-- image container -->
+        <div id="image-container">
+            <img src="../assets/icons/profile (1).png" alt="" id="image">
+            <img src="../assets/icons/write.png" alt="" id="edit-image">
+        </div>
+
+         <form id="auth-form" action="#" class="form auth-form">
+        <!-- Username -->
+        <div id="username-container" class="form-group">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            class="form-input"
+            name="username"
+            placeholder="Enter username"
+          />
+          <p id="error-username" class="form-error"></p>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="text"
+            id="email"
+            class="form-input"
+            name="email"
+            placeholder="Enter your email id"
+          />
+          <p id="error-email" class="form-error"></p>
+        </div>
+
+
+        <!-- Sign Up Button -->
+        <div class="form-action">
+          <button
+            id="btn-submit"
+            value="signup"
+            type="submit"
+            class="btn-submit"
+          >
+            Continue
+          </button>
+        </div>
+      </form>
+    </div>
+</body>
+</html>
