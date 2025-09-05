@@ -289,7 +289,7 @@ body {
 .alert-box {
   background-color: var(--color-LiteBg1);
   border-radius: 16px;
-  min-height: 100px;
+  min-height: 150px;
   padding: 24px;
   width: 370px;
   margin: auto;
