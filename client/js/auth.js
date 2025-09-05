@@ -48,8 +48,10 @@ const refocusHandler = function (Fieldid) {
 
 // Handling form summit response
 // TODO: Finished up later
-const responseHandler = (res) => {
-  console.log("Successfull ", res);
+const responseHandler = (statusCode, data) => {
+  if (statusCode === 400) {
+  } else {
+  }
 };
 
 // -------------------------
@@ -209,9 +211,11 @@ $("auth-form").addEventListener("submit", async function (e) {
       });
     }
 
+    const statusCode = res.status;
+
     const data = await res.json();
 
-    successfulHandler(data);
+    responseHandler(statusCode, data);
   } catch (err) {
     console.log("Something went wrong! Please try again.", err);
   }
@@ -244,4 +248,10 @@ $("toggle-signup").addEventListener("click", function () {
 
   $("btn-submit").textContent = "Sign up";
   $("btn-submit").value = "signup";
+});
+
+// Handling notification message
+
+$("cancel").addEventListener("click", function () {
+  $("alert-container").style.display = "none";
 });

@@ -20,7 +20,7 @@ exports.signUp = async (req, res) => {
     res.status(201).json({ message: "Signup successful!" });
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(400).json({ message: "Username already exists!" });
+      return res.status(400).json({ message: "Email already exists!" });
     }
 
     if (error.name === "ValidationError") {
