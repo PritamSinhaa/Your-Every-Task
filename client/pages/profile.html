@@ -3,34 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Profile page</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/profile.css">
   </head>
   <body>
     <div id="profile-page">
          <!-- Sign Up Form -->
-      <form id="profie-page-form" action="#" class="form auth-form">
+      <form id="profile-page-form" action="#" class="form auth-form">
 
         <!-- profile-image-container -->
          <div id="profile-page-container">
-          <img id="profile-image" src="../assets/icons/" alt="">
-          <img src="../assets/icons/write.png" alt="" id="change-profile-image">
+          <img id="profile-image" src="../assets/icons/profile.svg" alt="">
+          <img src="../assets/icons/edit.svg" alt="" id="change-profile-image">
          </div>
         <!-- Username -->
         <div id="username-container" class="form-group">
-          <label for="username" class="form-label">Username</label>
+          <!-- <label for="username" class="form-label">Username</label> -->
           <input
             type="text"
             id="username"
             class="form-input"
             name="username"
-            placeholder="Enter username"
+            placeholder="Handsome umar"
           />
           <p id="error-username" class="form-error"></p>
         </div>
 
         <!-- Email -->
         <div class="form-group">
-          <label for="email" class="form-label">Email</label>
+          <!-- <label for="email" class="form-label">Email</label> -->
           <input
             type="text"
             id="email"
@@ -44,10 +51,10 @@
 
     
 
-        <!-- Sign Up Button -->
+        <!-- Contunue Button -->
         <div class="form-action">
           <button
-            id="btn-submit"
+            id="btn-continue"
             value="signup"
             type="submit"
             class="btn-submit"
