@@ -120,16 +120,17 @@
  
     </div>
 
-         <!-- alert container -->
-    <div class="alert-main">
-      <div id="alert-container">
-        <h3>Error</h3>
-        <p id="alert">Check your internet connection.</p>
-        <button id="cancel">
-          <img src="../assets/icons/cancel.png" alt="" />
+    <!-- Alert Overlay -->
+    <div id="alert-overlay" class="alert-overlay">
+      <div class="alert-box">
+        <h3 id="alert-title">Error</h3>
+        <p id="alert-message">Check your internet connection.</p>
+        <button class="alert-close" id="alert-close">
+          <img src="../assets/icons/cancel.png" alt="Close alert" />
         </button>
       </div>
     </div>
+
     <script src="../js/auth.js"></script>
   </body>
 </html>

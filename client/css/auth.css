@@ -274,55 +274,82 @@ body {
 }
 
 /* alert container */
-
-.alert-main{
- height: 100%;
+.alert-overlay {
   position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(252, 252, 252, 0.2);
+  backdrop-filter: blur(4px);
   top: 0px;
-  backdrop-filter: blur(10px);
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: none;
-  background-color: rgba(22, 22, 22, .9);
-
-  
 }
 
-#alert-container {
+.alert-box {
   background-color: var(--color-LiteBg1);
   border-radius: 16px;
   min-height: 150px;
   padding: 24px;
-  width: 450px;
-  margin: 0 auto;
- position: absolute;
- top: 280px;
-  font-size: 1.3rem;
-}
-#alert-container h3{
-  font-weight: 500;
-  margin-bottom: 16px;
+  width: 370px;
+  margin: auto;
+  font-size: 1.2rem;
+  display: block;
+  position: relative;
+  animation: messageIn 0.4s ease-in forwards;
 }
 
-#alert {
-  width: 330px;
-  font-size: 1.1rem;
+.alert-box h3 {
+  margin-bottom: 20px;
+  font-weight: 500;
 }
-#cancel {
+
+#alert-message {
+  width: 330px;
+  font-weight: 100;
+}
+
+.alert-close {
   background-color: transparent;
   position: absolute;
-  top: 27px;
-  right: 20px;
+  top: 10px;
   border: none;
-}
-#cancel img {
-  width: 26px;
+  right: 10px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.2s all;
 }
 
-#cancel img:hover {
-  transform: scale(1.2);
+.alert-close:hover {
+  transform: scale(1.1);
+}
+
+/* Animation message in and out */
+
+@keyframes messageIn {
+  0% {
+    transform: translateY(60vh);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateY(-30px);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes messageOut {
+  0% {
+    transform: translateY(0vh);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(60vh);
+    opacity: 0;
+  }
 }
