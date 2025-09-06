@@ -46,15 +46,23 @@ const refocusHandler = function (Fieldid) {
   $(Fieldid).focus();
 };
 
+// Handling back end response
+// TODO: Finish up this
+const responseDisplay = (statusCode, heading, description) => {
+  if (statusCode === 400) {
+    overlayDisplay(heading, description);
+  } else if (statusCode === 201) {
+    window.location.replace("../pages/home.html");
+  }
+};
+
 // Handling form summit response
 // TODO: Finished up later
-const overlayDisplay = (statusCode, heading, description) => {
-  if (statusCode === 400) {
-    $("alert-overlay").style.display = "flex";
-    document.body.style.overflow = "hidden";
-    $("alert-title").textContent = heading;
-    $("alert-message").textContent = description;
-  }
+const overlayDisplay = (heading, description) => {
+  $("alert-overlay").style.display = "flex";
+  document.body.style.overflow = "hidden";
+  $("alert-title").textContent = heading;
+  $("alert-message").textContent = description;
 };
 
 // -------------------------
@@ -218,7 +226,7 @@ $("auth-form").addEventListener("submit", async function (e) {
 
     const data = await res.json();
 
-    overlayDisplay(statusCode, data.heading, data.message);
+    responseDisplay(statusCode, data.heading, data.message);
   } catch (err) {
     overlayDisplay(
       400,
@@ -228,9 +236,9 @@ $("auth-form").addEventListener("submit", async function (e) {
   }
 });
 
-// -------------------------
-// Handling form submit button
-// -------------------------
+// -------------------------------------------
+// Handling switch button sign up and sign in
+// -------------------------------------------
 $("toggle-signin").addEventListener("click", function () {
   $("username-container").classList.add("enable-display");
   $("confirm-password-container").classList.add("enable-display");
