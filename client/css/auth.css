@@ -65,6 +65,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   background-color: var(--color-SecondaryBg);
+  position: relative;
 }
 
 /* Wrapper */
@@ -220,6 +221,7 @@ body {
   cursor: pointer;
   transition: 0.1s;
 }
+
 .social-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 0 2px white;
@@ -247,6 +249,7 @@ body {
   color: var(--color-TextLink);
   text-decoration: none;
   cursor: pointer;
+  display: none;
 }
 
 .forgot-password:hover {
@@ -275,13 +278,13 @@ body {
 
 /* alert container */
 .alert-overlay {
-  position: absolute;
+  position: fixed;
   width: 100vw;
-  height: 100vh;
-  background-color: rgba(252, 252, 252, 0.2);
+  height: 100%;
+  background-color: #fcfcfc33;
   backdrop-filter: blur(4px);
   top: 0px;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -307,6 +310,7 @@ body {
 #alert-message {
   width: 330px;
   font-weight: 100;
+  white-space: pre-line;
 }
 
 .alert-close {
