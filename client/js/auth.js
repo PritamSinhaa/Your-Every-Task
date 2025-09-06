@@ -47,7 +47,6 @@ const refocusHandler = function (Fieldid) {
 };
 
 // Handling back end response
-// TODO: Finish up this
 const responseDisplay = (statusCode, heading, description) => {
   if (statusCode === 400) {
     overlayDisplay(heading, description);
@@ -57,7 +56,6 @@ const responseDisplay = (statusCode, heading, description) => {
 };
 
 // Handling form summit response
-// TODO: Finished up later
 const overlayDisplay = (heading, description) => {
   $("alert-overlay").style.display = "flex";
   document.body.style.overflow = "hidden";

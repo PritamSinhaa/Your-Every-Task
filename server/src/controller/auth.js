@@ -43,33 +43,31 @@ exports.signUp = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   try {
-    const { signinEmail, signinPassword } = req.body;
+    const { email, password } = req.body;
 
-    console.log(signinEmail);
+    console.log(email);
 
-    const user = await User.findOne({ email: signinEmail });
+    const user = await User.findOne({ email: email });
 
     if (!user)
       return res
         .status(400)
         .json({ heading: "Error", message: "User not found!" });
 
-    const passwordMatch = await bcrypt.compare(signinPassword, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch)
       return res
         .status(400)
-        .json({ heading: "Erorr", message: "Invalid password" });
+        .json({ heading: "Erorr", message: "Wrong password" });
 
     return res
-      .status(200)
+      .status(201)
       .json({ heading: "Success", message: "Sign in successful" });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        heading: "Error",
-        message: "Something when wrong! Try again later.",
-      });
+    res.status(500).json({
+      heading: "Error",
+      message: "Something when wrong! Try again later.",
+    });
   }
 };
