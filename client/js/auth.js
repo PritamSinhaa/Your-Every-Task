@@ -35,7 +35,7 @@ const errorHandler = (fieldId, fieldState, messageId) => {
   $(messageId).textContent = fieldState.message;
 
   if (!fieldState.valid && !fieldState.firstFocus && fieldState.focusOut) {
-    $(fieldId).style.border = "4px solid yellow";
+    $(fieldId).style.border = "4px solid red";
   } else {
     $(fieldId).style.border = "none";
   }
@@ -48,9 +48,12 @@ const refocusHandler = function (Fieldid) {
 
 // Handling form summit response
 // TODO: Finished up later
-const responseHandler = (statusCode, data) => {
+const overlayDisplay = (statusCode, heading, description) => {
   if (statusCode === 400) {
-  } else {
+    $("alert-overlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    $("alert-title").textContent = heading;
+    $("alert-message").textContent = description;
   }
 };
 
@@ -215,15 +218,15 @@ $("auth-form").addEventListener("submit", async function (e) {
 
     const data = await res.json();
 
-    responseHandler(statusCode, data);
+    overlayDisplay(statusCode, data.heading, data.message);
   } catch (err) {
-    console.log("Something went wrong! Please try again.", err);
+    overlayDisplay(
+      400,
+      "Network Error!",
+      "Oops! Something went wrong \nCheck your internet connection"
+    );
   }
 });
-
-function successfulHandler(data) {
-  console.log(data);
-}
 
 // -------------------------
 // Handling form submit button
@@ -237,6 +240,7 @@ $("toggle-signin").addEventListener("click", function () {
 
   $("btn-submit").textContent = "Sign in";
   $("btn-submit").value = "signin";
+  $("forgot-password").style.display = "block";
 });
 
 $("toggle-signup").addEventListener("click", function () {
@@ -248,10 +252,11 @@ $("toggle-signup").addEventListener("click", function () {
 
   $("btn-submit").textContent = "Sign up";
   $("btn-submit").value = "signup";
+  $("forgot-password").style.display = "none";
 });
 
 // Handling notification message
-
-$("cancel").addEventListener("click", function () {
-  $("alert-container").style.display = "none";
+$("alert-close").addEventListener("click", function () {
+  $("alert-overlay").style.display = "none";
+  document.body.style.overflow = "auto";
 });
