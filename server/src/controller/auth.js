@@ -15,7 +15,10 @@ exports.signUp = async (req, res) => {
       email: email,
       password: hashPassword,
     });
+
     await newUser.save();
+
+    req.session.userName = "Meshil";
 
     res.status(201).json({ heading: "Success", message: "Signup successful!" });
   } catch (error) {
@@ -32,7 +35,6 @@ exports.signUp = async (req, res) => {
         .json({ heading: "Error", message: errors.join(", ") });
     }
 
-    console.error(error);
     res
       .status(500)
       .json({ heading: "Error", message: "Something went wrong!" });
@@ -44,8 +46,6 @@ exports.signUp = async (req, res) => {
 exports.signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    console.log(email);
 
     const user = await User.findOne({ email: email });
 
@@ -60,6 +60,8 @@ exports.signIn = async (req, res) => {
       return res
         .status(400)
         .json({ heading: "Erorr", message: "Wrong password" });
+
+    req.session.userName = "Meshil";
 
     return res
       .status(201)

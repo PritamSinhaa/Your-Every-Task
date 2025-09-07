@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 require("dotenv").config();
 
 const api = require("./src/routes/api");
@@ -15,10 +16,20 @@ database(); // Connect to the database
 app.use(express.json()); // Parser the json
 app.use(cors());
 app.use(
-  session({ secret: "mySecreteKey", resave: false, saveUninitialized: false })
+  session({
+    secret: "mySecreteKey",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      dbName: "api",
+    }),
+  })
 );
 
-app.get("/", (req, res, next) => res.send("Home page"));
+app.get("/", (req, res, next) => {
+  res.send("Home page");
+});
 app.use("/api", uplodad.none(), api);
 
 app.listen(3000, () => {
