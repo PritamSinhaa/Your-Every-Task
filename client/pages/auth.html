@@ -16,7 +16,7 @@
     <!-- Full Form Wrapper -->
     <div class="auth-wrapper">
       <!-- Authentication Toggle -->
-      <div class="auth-toggle">
+      <div id="auth-toggle" class="auth-toggle">
         <button class="toggle-btn" id="toggle-signup">Sign Up</button>
         <button class="toggle-btn" id="toggle-signin">Sign In</button>
       </div>
@@ -67,7 +67,9 @@
             />
           </aside>
           <p id="error-password" class="form-error"></p>
-          <div class="forgot-password"><a href="3">Forgot password?</a></div>
+          <aside id="forgot-password" class="forgot-password">
+            <a href="3">Forgot password?</a>
+          </aside>
         </div>
 
         <!-- Confirm Password -->
@@ -117,13 +119,19 @@
           </div>
         </div>
       </form>
+    </div>
 
-      <!-- alert container -->
-      <div id="alert-container">
-        <p id="alert">Check your internet connection. </p>
-        <button id="cancel"><img src="../assets/icons/cancel.png" alt=""></button>
+    <!-- Alert Overlay -->
+    <div id="alert-overlay" class="alert-overlay">
+      <div class="alert-box">
+        <h3 id="alert-title">Error</h3>
+        <p id="alert-message">Check your internet connection.</p>
+        <button class="alert-close" id="alert-close">
+          <img src="../assets/icons/cancel.png" alt="Close alert" />
+        </button>
       </div>
     </div>
+
     <script src="../js/auth.js"></script>
   </body>
 </html>

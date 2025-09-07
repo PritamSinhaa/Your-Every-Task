@@ -21,6 +21,49 @@ const validation = {
   },
 };
 
+// -------------------------------------------
+// Handling switch button sign up and sign in
+// -------------------------------------------
+const enableSignup = () => {
+  $("username-container").classList.add("enable-display");
+  $("confirm-password-container").classList.add("enable-display");
+  $("toggle-signin").classList.add("signin-btn");
+  $("toggle-signup").classList.add("signup-btn");
+  $("btn-submit").textContent = "Sign in";
+  $("btn-submit").value = "signin";
+  $("forgot-password").style.display = "block";
+};
+
+const enableSignin = () => {
+  $("username-container").classList.remove("enable-display");
+  $("confirm-password-container").classList.remove("enable-display");
+  $("toggle-signin").classList.remove("signin-btn");
+  $("toggle-signup").classList.remove("signup-btn");
+  $("btn-submit").textContent = "Sign up";
+  $("btn-submit").value = "signup";
+  $("forgot-password").style.display = "none";
+};
+
+const signin = localStorage.getItem("signin");
+if (signin === null) {
+  enableSignup();
+} else if (signin === "true") {
+  enableSignin();
+} else {
+  enableSignup();
+}
+$("auth-toggle").style.display = "flex";
+
+$("toggle-signin").addEventListener("click", function () {
+  enableSignup();
+  localStorage.setItem("signin", false);
+});
+
+$("toggle-signup").addEventListener("click", function () {
+  enableSignin();
+  localStorage.setItem("signin", true);
+});
+
 // Checking focus in/out
 function checkFocus(fieldId, fieldState) {
   $(fieldId).addEventListener("focusout", function () {
@@ -35,7 +78,7 @@ const errorHandler = (fieldId, fieldState, messageId) => {
   $(messageId).textContent = fieldState.message;
 
   if (!fieldState.valid && !fieldState.firstFocus && fieldState.focusOut) {
-    $(fieldId).style.border = "4px solid yellow";
+    $(fieldId).style.border = "4px solid red";
   } else {
     $(fieldId).style.border = "none";
   }
@@ -46,10 +89,21 @@ const refocusHandler = function (Fieldid) {
   $(Fieldid).focus();
 };
 
+// Handling back end response
+const responseDisplay = (statusCode, heading, description) => {
+  if (statusCode === 400) {
+    overlayDisplay(heading, description);
+  } else if (statusCode === 201) {
+    window.location.replace("../pages/home.html");
+  }
+};
+
 // Handling form summit response
-// TODO: Finished up later
-const responseHandler = (res) => {
-  console.log("Successfull ", res);
+const overlayDisplay = (heading, description) => {
+  $("alert-overlay").style.display = "flex";
+  document.body.style.overflow = "hidden";
+  $("alert-title").textContent = heading;
+  $("alert-message").textContent = description;
 };
 
 // -------------------------
@@ -209,39 +263,24 @@ $("auth-form").addEventListener("submit", async function (e) {
       });
     }
 
+    const statusCode = res.status;
+
     const data = await res.json();
 
-    successfulHandler(data);
+    responseDisplay(statusCode, data.heading, data.message);
   } catch (err) {
-    console.log("Something went wrong! Please try again.", err);
+    overlayDisplay(
+      400,
+      "Network Error!",
+      "Oops! Something went wrong \nCheck your internet connection"
+    );
   }
 });
 
-function successfulHandler(data) {
-  console.log(data);
-}
+// Handling notification message
+$("alert-close").addEventListener("click", function () {
+  $("alert-overlay").style.display = "none";
+  document.body.style.overflow = "auto";
 
-// -------------------------
-// Handling form submit button
-// -------------------------
-$("toggle-signin").addEventListener("click", function () {
-  $("username-container").classList.add("enable-display");
-  $("confirm-password-container").classList.add("enable-display");
-
-  $("toggle-signin").classList.add("signin-btn");
-  $("toggle-signup").classList.add("signup-btn");
-
-  $("btn-submit").textContent = "Sign in";
-  $("btn-submit").value = "signin";
-});
-
-$("toggle-signup").addEventListener("click", function () {
-  $("username-container").classList.remove("enable-display");
-  $("confirm-password-container").classList.remove("enable-display");
-
-  $("toggle-signin").classList.remove("signin-btn");
-  $("toggle-signup").classList.remove("signup-btn");
-
-  $("btn-submit").textContent = "Sign up";
-  $("btn-submit").value = "signup";
+  localStorage.setItem("signup", true);
 });

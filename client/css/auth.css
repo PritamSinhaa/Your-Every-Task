@@ -65,6 +65,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   background-color: var(--color-SecondaryBg);
+  position: relative;
 }
 
 /* Wrapper */
@@ -80,7 +81,7 @@ body {
 .auth-toggle {
   background: linear-gradient(var(--color-LiteBg1) 50%, var(--color-BtnBg) 50%);
   height: 65px;
-  display: flex;
+  display: none;
   overflow: hidden;
   padding-bottom: 5px;
   border-radius: 0.8rem 0.8rem 0 0;
@@ -220,6 +221,7 @@ body {
   cursor: pointer;
   transition: 0.1s;
 }
+
 .social-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 0 2px white;
@@ -247,6 +249,7 @@ body {
   color: var(--color-TextLink);
   text-decoration: none;
   cursor: pointer;
+  display: none;
 }
 
 .forgot-password:hover {
@@ -274,39 +277,83 @@ body {
 }
 
 /* alert container */
+.alert-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  background-color: #fcfcfc33;
+  backdrop-filter: blur(4px);
+  top: 0px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
 
-#alert-container {
+.alert-box {
   background-color: var(--color-LiteBg1);
   border-radius: 16px;
-  min-height: 100px;
+  min-height: 150px;
   padding: 24px;
   width: 370px;
-  margin: 0 auto;
-  position: absolute;
-  top: 200px;
-  left: 15px;
-  font-size: 1.3rem;
-  display: none;
-
+  margin: auto;
+  font-size: 1.2rem;
+  display: block;
+  position: relative;
+  animation: messageIn 0.4s ease-in forwards;
 }
 
-#alert{
+.alert-box h3 {
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+#alert-message {
   width: 330px;
+  font-weight: 100;
+  white-space: pre-line;
 }
-#cancel{
+
+.alert-close {
   background-color: transparent;
   position: absolute;
-  top: 27px;
-  right: 20px;
+  top: 10px;
   border: none;
-  
-}
-#cancel img{
-  width: 26px;
+  right: 10px;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s all;
 }
 
-#cancel img:hover{
-  transform: scale(1.2);
+.alert-close:hover {
+  transform: scale(1.1);
+}
+
+/* Animation message in and out */
+
+@keyframes messageIn {
+  0% {
+    transform: translateY(60vh);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateY(-30px);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes messageOut {
+  0% {
+    transform: translateY(0vh);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(60vh);
+    opacity: 0;
+  }
 }
