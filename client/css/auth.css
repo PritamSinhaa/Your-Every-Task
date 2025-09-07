@@ -81,7 +81,7 @@ body {
 .auth-toggle {
   background: linear-gradient(var(--color-LiteBg1) 50%, var(--color-BtnBg) 50%);
   height: 65px;
-  display: flex;
+  display: none;
   overflow: hidden;
   padding-bottom: 5px;
   border-radius: 0.8rem 0.8rem 0 0;

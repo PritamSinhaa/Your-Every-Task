@@ -45,7 +45,14 @@ const enableSignin = () => {
 };
 
 const signin = localStorage.getItem("signin");
-signin === "true" ? enableSignin() : enableSignup();
+if (signin === null) {
+  enableSignup();
+} else if (signin === "true") {
+  enableSignin();
+} else {
+  enableSignup();
+}
+$("auth-toggle").style.display = "flex";
 
 $("toggle-signin").addEventListener("click", function () {
   enableSignup();
