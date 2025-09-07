@@ -21,6 +21,42 @@ const validation = {
   },
 };
 
+// -------------------------------------------
+// Handling switch button sign up and sign in
+// -------------------------------------------
+const enableSignup = () => {
+  $("username-container").classList.add("enable-display");
+  $("confirm-password-container").classList.add("enable-display");
+  $("toggle-signin").classList.add("signin-btn");
+  $("toggle-signup").classList.add("signup-btn");
+  $("btn-submit").textContent = "Sign in";
+  $("btn-submit").value = "signin";
+  $("forgot-password").style.display = "block";
+};
+
+const enableSignin = () => {
+  $("username-container").classList.remove("enable-display");
+  $("confirm-password-container").classList.remove("enable-display");
+  $("toggle-signin").classList.remove("signin-btn");
+  $("toggle-signup").classList.remove("signup-btn");
+  $("btn-submit").textContent = "Sign up";
+  $("btn-submit").value = "signup";
+  $("forgot-password").style.display = "none";
+};
+
+const signin = localStorage.getItem("signin");
+signin === "true" ? enableSignin() : enableSignup();
+
+$("toggle-signin").addEventListener("click", function () {
+  enableSignup();
+  localStorage.setItem("signin", false);
+});
+
+$("toggle-signup").addEventListener("click", function () {
+  enableSignin();
+  localStorage.setItem("signin", true);
+});
+
 // Checking focus in/out
 function checkFocus(fieldId, fieldState) {
   $(fieldId).addEventListener("focusout", function () {
@@ -234,35 +270,10 @@ $("auth-form").addEventListener("submit", async function (e) {
   }
 });
 
-// -------------------------------------------
-// Handling switch button sign up and sign in
-// -------------------------------------------
-$("toggle-signin").addEventListener("click", function () {
-  $("username-container").classList.add("enable-display");
-  $("confirm-password-container").classList.add("enable-display");
-
-  $("toggle-signin").classList.add("signin-btn");
-  $("toggle-signup").classList.add("signup-btn");
-
-  $("btn-submit").textContent = "Sign in";
-  $("btn-submit").value = "signin";
-  $("forgot-password").style.display = "block";
-});
-
-$("toggle-signup").addEventListener("click", function () {
-  $("username-container").classList.remove("enable-display");
-  $("confirm-password-container").classList.remove("enable-display");
-
-  $("toggle-signin").classList.remove("signin-btn");
-  $("toggle-signup").classList.remove("signup-btn");
-
-  $("btn-submit").textContent = "Sign up";
-  $("btn-submit").value = "signup";
-  $("forgot-password").style.display = "none";
-});
-
 // Handling notification message
 $("alert-close").addEventListener("click", function () {
   $("alert-overlay").style.display = "none";
   document.body.style.overflow = "auto";
+
+  localStorage.setItem("signup", true);
 });
