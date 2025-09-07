@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
+const session = require("express-session");
 require("dotenv").config();
 
 const api = require("./src/routes/api");
@@ -13,6 +14,9 @@ database(); // Connect to the database
 
 app.use(express.json()); // Parser the json
 app.use(cors());
+app.use(
+  session({ secret: "mySecreteKey", resave: false, saveUninitialized: false })
+);
 
 app.get("/", (req, res, next) => res.send("Home page"));
 app.use("/api", uplodad.none(), api);
