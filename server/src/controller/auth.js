@@ -1,9 +1,19 @@
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
 
 const User = require("../model/user");
 
-// Sign up controller
+// Create reusable transporter for Mailgun SMTP
+const transporter = nodemailer.createTransport({
+  host: "smtp.mailgun.org",
+  port: 465, // TLS
+  auth: {
+    user: process.env.MAILGUN_USER, // Mailgun SMTP login
+    pass: process.env.MAILGUN_PASS, // Mailgun SMTP password
+  },
+});
 
+// Sign up controller
 exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -15,7 +25,22 @@ exports.signUp = async (req, res) => {
       email: email,
       password: hashPassword,
     });
+
     await newUser.save();
+
+    // Send welcome email with Mailgun + Nodemailer
+    try {
+      await transporter.sendMail({
+        from: "noreply@yourdomain.com",
+        to: email,
+        subject: "Welcome to Your Every Task 🎉",
+        text: `Hello ${username},\n\nThank you for signing up!`,
+        html: `<p>Hello <b>${username}</b>,</p><p>Thank you for signing up!</p>
+        <p> Be productive. 😎`,
+      });
+    } catch (mailError) {
+      console.error("Mailgun error:", mailError.message);
+    }
 
     res.status(201).json({ heading: "Success", message: "Signup successful!" });
   } catch (error) {
@@ -32,7 +57,6 @@ exports.signUp = async (req, res) => {
         .json({ heading: "Error", message: errors.join(", ") });
     }
 
-    console.error(error);
     res
       .status(500)
       .json({ heading: "Error", message: "Something went wrong!" });
@@ -40,12 +64,9 @@ exports.signUp = async (req, res) => {
 };
 
 // Sign in controller
-
 exports.signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    console.log(email);
 
     const user = await User.findOne({ email: email });
 
@@ -59,7 +80,9 @@ exports.signIn = async (req, res) => {
     if (!passwordMatch)
       return res
         .status(400)
-        .json({ heading: "Erorr", message: "Wrong password" });
+        .json({ heading: "Error", message: "Wrong password" });
+
+    req.session.isLogin = true;
 
     return res
       .status(201)
@@ -67,7 +90,7 @@ exports.signIn = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       heading: "Error",
-      message: "Something when wrong! Try again later.",
+      message: "Something went wrong! Try again later.",
     });
   }
 };
