@@ -33,9 +33,10 @@ exports.signUp = async (req, res) => {
       await transporter.sendMail({
         from: "noreply@yourdomain.com",
         to: email,
-        subject: "Welcome to My App 🎉",
+        subject: "Welcome to Your Every Task 🎉",
         text: `Hello ${username},\n\nThank you for signing up!`,
-        html: `<p>Hello <b>${username}</b>,</p><p>Thank you for signing up!</p>`,
+        html: `<p>Hello <b>${username}</b>,</p><p>Thank you for signing up!</p>
+        <p> Be productive. 😎`,
       });
     } catch (mailError) {
       console.error("Mailgun error:", mailError.message);
