@@ -3,13 +3,14 @@ const cors = require("cors");
 const multer = require("multer");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-require("dotenv").config();
+const dotevn = require("dotenv");
 
 const api = require("./src/routes/api");
 const database = require("./src/config/db");
 
 const app = express();
 const uplodad = multer();
+dotevn.config();
 
 database(); // Connect to the database
 

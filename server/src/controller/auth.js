@@ -1,5 +1,8 @@
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const dotevn = require("dotenv");
+
+dotevn.config();
 
 const User = require("../model/user");
 
