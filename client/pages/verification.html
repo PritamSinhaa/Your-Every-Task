@@ -22,23 +22,49 @@
       <p>example@gmail.com</p>
 
       <!-- OTP container -->
-      <div class="otp-container">
-        <div class="otp">2</div>
-        <div class="otp">1</div>
-        <div class="otp">-</div>
-        <div class="otp">-</div>
-      </div>
+      <form>
+        <div class="otp-container">
+          <input
+            class="otp"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+        </div>
+      </form>
 
-        <p class="countdown">32:2</p>
+      <p class="countdown">2:23</p>
 
       <p class="text1">Didn't recieve OTP?</p>
       <a href="#">Resend code</a>
 
       <!-- verify button -->
       <button class="verify-btn">Verify</button>
-      <div class="back-btn">
-        <img src="../assets/icons/back (1).png" alt="" />
-      </div>
+      <button class="back-btn">
+        <img src="../assets/icons/left-arrow.svg" alt="" />
+      </button>
     </div>
   </body>
 </html>
