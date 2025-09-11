@@ -57,16 +57,21 @@
             maxlength="1"
           />
         </div>
+
+        <p class="text1">Didn't recieve OTP?</p>
+        <button disabled class="resend">2:30</button>
+
+        <!-- verify button -->
+        <button id="btn-submit" class="verify-btn btn-disable" disabled>
+          Verify
+        </button>
       </form>
-
-      <p class="text1">Didn't recieve OTP?</p>
-      <button disabled class="resend">2:30</button>
-
-      <!-- verify button -->
-      <button class="verify-btn">Verify</button>
-      <button class="back-btn">
-        <img src="../assets/icons/left-arrow.svg" alt="" />
-      </button>
     </div>
+
+    <button type="submit" class="back-btn">
+      <img src="../assets/icons/left-arrow.svg" alt="" />
+    </button>
+
+    <script src="../js/verification.js"></script>
   </body>
 </html>
