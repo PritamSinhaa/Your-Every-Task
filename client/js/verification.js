@@ -29,3 +29,7 @@ inputValue.forEach((element, i) => {
     }
   });
 });
+
+$("btn-back").addEventListener("click", () => {
+  window.location.href = "../pages/auth.html";
+});

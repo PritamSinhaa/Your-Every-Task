@@ -132,7 +132,7 @@ body {
   transition: 0.3s all;
 }
 
-.back-btn {
+.btn-back {
   width: 32px;
   height: 32px;
   display: flex;
@@ -147,7 +147,7 @@ body {
   transition: 0.3s all;
 }
 
-.back-btn:hover {
+.btn-back:hover {
   cursor: pointer;
   transform: scale(1.5);
   transition: 0.3s all;
