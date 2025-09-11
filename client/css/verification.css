@@ -70,7 +70,7 @@ body {
 
 .page {
   width: 350px;
-  margin: 32px auto;
+  margin: 24px auto;
   padding: 48px;
   border: 1px solid rgba(169, 162, 162, 0.3);
   position: relative;
@@ -88,7 +88,7 @@ body {
 }
 
 .text1 {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: rgb(156, 155, 155);
   margin-bottom: 4px;
 }
@@ -97,7 +97,7 @@ body {
   display: flex;
   gap: 10px;
   justify-content: center;
-  margin: 32px 0px;
+  margin: 64px 0px;
 }
 
 .otp {
@@ -123,6 +123,13 @@ body {
   font-size: 1.4rem;
   font-weight: 400;
   border: none;
+  transition: 0.3s all;
+}
+
+.verify-btn:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  transition: 0.3s all;
 }
 
 .back-btn {
@@ -149,4 +156,11 @@ body {
 .countdown {
   font-weight: 500;
   margin-bottom: 12px;
+}
+
+.resend {
+  background-color: transparent;
+  border: none;
+  color: var(--color-DisableText);
+  font-size: 1rem;
 }
