@@ -10,16 +10,20 @@ const hasEmpty = () =>
 
 inputValue.forEach((element, i) => {
   element.addEventListener("input", () => {
+    element.value = element.value.replace(/\D/g, "");
+
     const button = $("btn-submit");
     const empty = hasEmpty();
 
     button.disabled = empty;
     button.classList.toggle("btn-disable", empty);
 
+    // Auto move to next box if current has a digit
     if (element.value !== "" && i < inputValue.length - 1) {
       inputValue[i + 1].focus();
     }
 
+    // Move back if box is empty and not the first
     if (element.value === "" && i > 0) {
       inputValue[i - 1].focus();
     }
