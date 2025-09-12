@@ -103,7 +103,7 @@ body {
 .otp {
   border: none;
   background-color: var(--color-DisableBtn);
-  width: 60px;
+  width: 40px;
   height: 38px;
   font-size: rem;
   border-radius: 0.4rem;
