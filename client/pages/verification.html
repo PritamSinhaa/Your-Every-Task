@@ -18,11 +18,23 @@
     <!-- main page -->
     <div class="page">
       <h1>Verify Code</h1>
-      <p class="text1">Please enter the code we just sent to email</p>
-      <p>example@gmail.com</p>
 
       <!-- OTP container -->
       <form>
+        <div class="email-container">
+          <input
+            id="email"
+            class="email"
+            name="email"
+            placeholder="example@gmail.com"
+          />
+          <button id="btn-send" class="btn-send">Send</button>
+        </div>
+
+        <label id="email-label" for="email" class="text1"
+          >Please enter the code we just sent to email</label
+        >
+
         <div class="otp-container">
           <input
             class="otp"
@@ -73,9 +85,6 @@
             maxlength="1"
           />
         </div>
-
-        <p class="text1">Didn't recieve OTP?</p>
-        <button disabled class="resend">2:30</button>
 
         <!-- verify button -->
         <button id="btn-submit" class="verify-btn btn-disable" disabled>
