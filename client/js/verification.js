@@ -33,10 +33,3 @@ inputValue.forEach((element, i) => {
 $("btn-back").addEventListener("click", () => {
   window.location.href = "../pages/auth.html";
 });
-
-const generateOTP = () => {
-  const random = Math.floor(Math.random() * Math.pow(10, 6));
-  return Number(String(random).padEnd(6, "0"));
-};
-
-console.log(generateOTP());
