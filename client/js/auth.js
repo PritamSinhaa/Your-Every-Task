@@ -44,6 +44,7 @@ const enableSignin = () => {
   $("forgot-password").style.display = "none";
 };
 
+// checking there in which state
 const signin = localStorage.getItem("signin");
 if (signin === null) {
   enableSignup();
@@ -252,11 +253,13 @@ $("auth-form").addEventListener("submit", async function (e) {
 
   try {
     if (submitBtn === "signup") {
+      // FIXME: change in real host
       res = await fetch("http://localhost:3000/api/auth/sign-up", {
         method: "POST",
         body: formData,
       });
     } else if (submitBtn === "signin") {
+      // FIXME: change in real host
       res = await fetch("http://localhost:3000/api/auth/sign-in", {
         method: "POST",
         body: formData,

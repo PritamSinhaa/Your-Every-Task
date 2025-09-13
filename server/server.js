@@ -6,6 +6,7 @@ const MongoStore = require("connect-mongo");
 const dotevn = require("dotenv");
 
 const api = require("./src/routes/api");
+const mainRoutes = require("./src/routes/main-routes");
 const database = require("./src/config/db");
 
 const app = express();
@@ -28,9 +29,7 @@ app.use(
   })
 );
 
-app.get("/", (req, res, next) => {
-  res.send("Home page");
-});
+app.use("", uplodad.none(), mainRoutes);
 app.use("/api", uplodad.none(), api);
 
 app.listen(3000, () => {

@@ -3,11 +3,13 @@ const $$ = (clss) => document.querySelectorAll(`.${clss}`);
 
 const inputValue = $$("otp");
 
+// checking the input is empty or not
 const hasEmpty = () =>
   Array.from(inputValue).some(
     (element) => element.value === "" || element.value === undefined
   );
 
+// handle the otp input
 inputValue.forEach((element, i) => {
   element.addEventListener("input", () => {
     element.value = element.value.replace(/\D/g, "");
@@ -30,6 +32,30 @@ inputValue.forEach((element, i) => {
   });
 });
 
+// check valid email
+
+// handle send email
+$("btn-send").addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const email = $("email").value;
+
+  const formData = new FormData();
+  formData.append("email: ", email);
+
+  try {
+    const res = await fetch("http://localhost:3000/auth/send-email", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// handle the back btn
 $("btn-back").addEventListener("click", () => {
   window.location.href = "../pages/auth.html";
 });
