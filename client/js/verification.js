@@ -33,27 +33,46 @@ inputValue.forEach((element, i) => {
 });
 
 // check valid email
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// handle send email
-$("btn-send").addEventListener("click", async (e) => {
-  e.preventDefault();
+// check email input
+$("email").addEventListener("input", function () {
+  const btnSend = $("btn-send");
+  const valid = emailRegex.test(this.value);
 
-  const email = $("email").value;
-
-  const formData = new FormData();
-  formData.append("email: ", email);
-
-  try {
-    const res = await fetch("http://localhost:3000/auth/send-email", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await res.json();
-    console.log(data);
-  } catch (err) {
-    console.log(err);
+  if (valid) {
+    btnSend.style.backgroundColor = "var(--color-BtnBg) !important";
+    btnSend.disabled = false;
+    sendHandle();
+  } else {
+    btnSend.disabled = true;
+    btnSend.style.backgroundColor = "var(--color-DisableBtn) !important";
   }
 });
+
+// handle send email
+function sendHandle() {
+  $("btn-send").addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const email = $("email").value;
+    console.log(email);
+
+    const formData = new FormData();
+    formData.append("email: ", email);
+
+    try {
+      const res = await fetch("http://localhost:3000/auth/send-email", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+}
 
 // handle the back btn
 $("btn-back").addEventListener("click", () => {

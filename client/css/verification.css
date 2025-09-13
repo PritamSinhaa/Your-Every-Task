@@ -94,7 +94,6 @@ body {
   width: 64px;
   border: none;
   border-radius: 8px;
-  background-color: var(--color-BtnBg);
   color: var(--color-BasicBg);
   transition: all 0.3s;
 }
@@ -154,7 +153,6 @@ body {
   width: 100%;
   height: 45px;
   border-radius: 500px;
-  background-color: var(--color-BtnBg);
   color: var(--color-Input);
   font-size: 1.4rem;
   font-weight: 400;
