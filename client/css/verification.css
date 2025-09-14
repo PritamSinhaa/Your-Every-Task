@@ -144,6 +144,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--color-TextOnYellow);
 }
 
 .verify-btn {
@@ -156,6 +157,7 @@ body {
   font-weight: 400;
   border: none;
   transition: 0.3s all;
+  background-color: var(--color-BtnBg);
 }
 
 .verify-btn:hover {

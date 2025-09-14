@@ -89,6 +89,11 @@ BtnSend.addEventListener("click", async (e) => {
   e.preventDefault();
 
   countDown();
+
+  inputValue.forEach((element) => {
+    element.disabled = false;
+    element.style.backgroundColor = "#919191ff";
+  });
 });
 
 // handle the back btn
