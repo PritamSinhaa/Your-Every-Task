@@ -74,6 +74,22 @@ function countDown() {
   }, 1000);
 }
 
+// send email
+const sendEmail = async () => {
+  const email = $("email").value;
+  const formData = new FormData();
+  formData.append("email", email);
+
+  try {
+    const res = await fetch("http://localhost:3000/auth/send-email", {
+      method: "POST",
+      body: formData,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // check email input
 $("email").addEventListener("input", function () {
   const valid = checkValid(this.value);
@@ -89,6 +105,7 @@ BtnSend.addEventListener("click", async (e) => {
   e.preventDefault();
 
   countDown();
+  sendEmail();
 
   inputValue.forEach((element) => {
     element.disabled = false;
