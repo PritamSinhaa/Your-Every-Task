@@ -1,7 +1,30 @@
 const $ = (id) => document.getElementById(id);
 const $$ = (clss) => document.querySelectorAll(`.${clss}`);
 
+const BtnSend = $("btn-send");
+
 const inputValue = $$("otp");
+let timeOut = true;
+
+// disable button
+function disableButton() {
+  BtnSend.disabled = true;
+  BtnSend.style.backgroundColor = "var(--color-DisableBtn) !important";
+}
+
+// enable button
+function enableButton() {
+  BtnSend.textContent = "Send";
+  BtnSend.disabled = false;
+  BtnSend.style.backgroundColor = "var(--color-BtnBg) !important";
+}
+
+// check valid email
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function checkValid(email) {
+  return emailRegex.test(email) && timeOut;
+}
 
 // checking the input is empty or not
 const hasEmpty = () =>
@@ -32,47 +55,41 @@ inputValue.forEach((element, i) => {
   });
 });
 
-// check valid email
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// count down for resend
+function countDown() {
+  let time = 30;
+
+  const timer = setInterval(() => {
+    time--;
+
+    if (time < 1) {
+      clearInterval(timer);
+      enableButton();
+      timeOut = true;
+    } else {
+      disableButton();
+      BtnSend.textContent = time;
+      timeOut = false;
+    }
+  }, 1000);
+}
 
 // check email input
 $("email").addEventListener("input", function () {
-  const btnSend = $("btn-send");
-  const valid = emailRegex.test(this.value);
+  const valid = checkValid(this.value);
 
   if (valid) {
-    btnSend.style.backgroundColor = "var(--color-BtnBg) !important";
-    btnSend.disabled = false;
-    sendHandle();
+    enableButton();
   } else {
-    btnSend.disabled = true;
-    btnSend.style.backgroundColor = "var(--color-DisableBtn) !important";
+    disableButton();
   }
 });
 
-// handle send email
-function sendHandle() {
-  $("btn-send").addEventListener("click", async (e) => {
-    e.preventDefault();
+BtnSend.addEventListener("click", async (e) => {
+  e.preventDefault();
 
-    const email = $("email").value;
-    console.log(email);
-
-    const formData = new FormData();
-    formData.append("email: ", email);
-
-    try {
-      const res = await fetch("http://localhost:3000/auth/send-email", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  });
-}
+  countDown();
+});
 
 // handle the back btn
 $("btn-back").addEventListener("click", () => {
