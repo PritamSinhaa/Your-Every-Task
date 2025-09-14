@@ -2,7 +2,7 @@
 Font-end folder
 =========================
 
-todo-app/
+Your-Every-Task/
 │
 ├── index.html          # Main HTML file (entry point)
 │
@@ -64,6 +64,9 @@ todolist-app/
 │ │
 │ ├── services/ # Business logic layer
 │ │ └── userService.js
+│ │
+│ ├── templates/ # Business logic layer
+│ │ └── reset-password.js
 │ │
 │ ├── validations/ # Joi/Yup/Zod validations
 │ │ └── userValidation.js
