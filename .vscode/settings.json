@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
   "liveServer.settings.port": 5501
+=======
+  "postman.settings.dotenv-detection-notification-visibility": false
+>>>>>>> 1e53284ab5b129393279d32febd99e6871d5651d
 }
