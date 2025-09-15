@@ -2,12 +2,13 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
 const dotenv = require("dotenv");
+const crypto = require("crypto");
+
 const User = require("../model/user");
 
 dotenv.config();
 
 // import html file
-const _dirname = path.resolve();
 const templatePath = path.join(
   __dirname,
   "..",
@@ -31,20 +32,22 @@ exports.sendEmail = async (req, res) => {
   let user;
 
   // Generate the random number
-  const random = Math.floor(Math.random() * Math.pow(10, 6));
-  const generateOTP = () => String(random).padEnd(6, 0);
+  const otp = () => {
+    const otp = crypto.randomInt(100000, 999999);
+    return otp.toString();
+  };
 
   try {
-    res = await User.findOne({ email });
-    user = res.userName;
+    user = await User.findOne({ email });
+    userName = res.userName;
   } catch (err) {
     console.log("Something when wrong");
     return;
   }
 
   htmlContent = htmlContent
-    .replace("{{username}}", user)
-    .replace("{{otp}}", generateOTP());
+    .replace("{{username}}", userName)
+    .replace("{{otp}}", otp);
 
   try {
     await transporter.sendMail({
