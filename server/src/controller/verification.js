@@ -32,14 +32,18 @@ exports.sendEmail = async (req, res) => {
   let user;
 
   // Generate the random number
-  const otp = () => {
-    const otp = crypto.randomInt(100000, 999999);
-    return otp.toString();
-  };
+  const otp = crypto.randomInt(100000, 999999).toString();
 
   try {
     user = await User.findOne({ email });
-    userName = res.userName;
+    userName = user.userName;
+
+    user.otp = otp;
+    user.otpExpires = Date.now() + 10 * 60 * 1000;
+
+    await user.save();
+
+    console.log(otp);
   } catch (err) {
     console.log("Something when wrong");
     return;
@@ -61,3 +65,5 @@ exports.sendEmail = async (req, res) => {
     console.log(err);
   }
 };
+
+exports.verifyOTP = async () => {};
