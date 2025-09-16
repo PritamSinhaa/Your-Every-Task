@@ -8,6 +8,8 @@ const User = require("../model/user");
 
 dotenv.config();
 
+let user;
+
 // import html file
 const templatePath = path.join(
   __dirname,
@@ -29,7 +31,6 @@ const transporter = nodemailer.createTransport({
 
 exports.sendEmail = async (req, res) => {
   const { email } = req.body;
-  let user;
 
   // Generate the random number
   const otp = crypto.randomInt(100000, 999999).toString();
@@ -42,8 +43,6 @@ exports.sendEmail = async (req, res) => {
     user.otpExpires = Date.now() + 10 * 60 * 1000;
 
     await user.save();
-
-    console.log(otp);
   } catch (err) {
     console.log("Something when wrong");
     return;
@@ -69,5 +68,14 @@ exports.sendEmail = async (req, res) => {
 exports.verifyOTP = async (req, res) => {
   try {
     const { otp } = await req.body;
+
+    if (user.otp !== otp || user.otpExpires < Date.now()) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    } else {
+      res.json({ message: "Verify otp successfully" });
+    }
+
+    user.otp = undefined;
+    user.otpExpires = undefined;
   } catch (err) {}
 };
