@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "connect-mongo": "^5.1.0",
-    "cookie-parser": "^1.4.7",
-    "express-session": "^1.18.2"
-  }
-}
