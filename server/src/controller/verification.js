@@ -66,4 +66,8 @@ exports.sendEmail = async (req, res) => {
   }
 };
 
-exports.verifyOTP = async () => {};
+exports.verifyOTP = async (req, res) => {
+  try {
+    const { otp } = await req.body;
+  } catch (err) {}
+};

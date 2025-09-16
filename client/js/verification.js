@@ -81,7 +81,7 @@ const sendEmail = async () => {
   formData.append("email", email);
 
   try {
-    const res = await fetch("http://localhost:3000/auth/send-email", {
+    const res = await fetch("http://localhost:3000/api/auth/send-email", {
       method: "POST",
       body: formData,
     });
@@ -101,6 +101,7 @@ $("email").addEventListener("input", function () {
   }
 });
 
+// send email handler
 BtnSend.addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -116,4 +117,31 @@ BtnSend.addEventListener("click", async (e) => {
 // handle the back btn
 $("btn-back").addEventListener("click", () => {
   window.location.href = "../pages/auth.html";
+});
+
+// handle verify otp
+$("btn-submit").addEventListener("click", async function (e) {
+  e.preventDefault();
+
+  const otpInput = $$("otp");
+
+  const otp = Array.from(otpInput)
+    .map((ele) => ele.value)
+    .join("");
+
+  const formData = new FormData();
+
+  formData.append("otp", otp);
+
+  try {
+    // TODO: change the local by real host
+    const res = await fetch("http://localhost:3000/auth/verify-otp", {
+      method: "POST",
+      body: formData,
+    });
+
+    console.log(data);
+  } catch (err) {
+    console.log("Something when wrong");
+  }
 });

@@ -25,7 +25,8 @@ Your-Every-Task/
 │   ├── dom.js          # DOM manipulation (render tasks, update UI)
 │   ├── todo.js         # To-Do item logic (add, edit, delete, complete)
 │   ├── filters.js      # Filtering & sorting tasks (completed, pending, date, etc.)
-│   └── utils.js        # Helper functions (date formatter, unique ID, etc.)
+│   ├── utils.js        # Helper functions (date formatter, unique ID, etc.)
+|   └── config.js       # To store the uri (http/localhost:300/api)
 │
 ├── components/         # Reusable HTML snippets (optional if you want modularity)
 │   ├── header.html

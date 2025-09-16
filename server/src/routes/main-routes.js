@@ -1,9 +1,9 @@
 const express = require("express");
-
-const verification = require("../controller/verification");
+const auth = require("./auth");
 
 const router = express.Router();
 
-router.post("/auth/send-email", verification.sendEmail);
+// mount all auth routes under /auth
+router.use("/auth", auth);
 
 module.exports = router;
