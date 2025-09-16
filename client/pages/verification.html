@@ -18,27 +18,86 @@
     <!-- main page -->
     <div class="page">
       <h1>Verify Code</h1>
-      <p class="text1">Please enter the code we just sent to email</p>
-      <p>example@gmail.com</p>
 
       <!-- OTP container -->
-      <div class="otp-container">
-        <div class="otp">2</div>
-        <div class="otp">1</div>
-        <div class="otp">-</div>
-        <div class="otp">-</div>
-      </div>
+      <form>
+        <div class="email-container">
+          <input
+            id="email"
+            class="email"
+            name="email"
+            placeholder="example@gmail.com"
+          />
+          <button id="btn-send" class="btn-send" disabled>Send</button>
+        </div>
+        <p id="err-message" class="err-message"></p>
 
-        <p class="countdown">32:2</p>
+        <label id="email-label" for="email" class="text1"
+          >Please enter the code we just sent to email</label
+        >
 
-      <p class="text1">Didn't recieve OTP?</p>
-      <a href="#">Resend code</a>
+        <div class="otp-container">
+          <input
+            class="otp"
+            autocomplete="none"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            autocomplete="none"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            autocomplete="none"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            autocomplete="none"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            autocomplete="none"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            autocomplete="none"
+            name="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+          />
+        </div>
 
-      <!-- verify button -->
-      <button class="verify-btn">Verify</button>
-      <div class="back-btn">
-        <img src="../assets/icons/back (1).png" alt="" />
-      </div>
+        <!-- verify button -->
+        <button id="btn-submit" class="verify-btn btn-disable" disabled>
+          Verify
+        </button>
+      </form>
+
+      <button id="btn-back" type="submit" class="btn-back">
+        <img src="../assets/icons/left-arrow.svg" alt="" />
+      </button>
     </div>
+
+    <script src="../js/verification.js"></script>
   </body>
 </html>
