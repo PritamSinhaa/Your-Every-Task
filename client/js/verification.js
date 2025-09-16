@@ -80,8 +80,9 @@ const sendEmail = async () => {
   const formData = new FormData();
   formData.append("email", email);
 
+  console.log("Hello");
   try {
-    const res = await fetch("http://localhost:3000/api/auth/send-email", {
+    const res = await fetch("http://localhost:3000/auth/send-email", {
       method: "POST",
       body: formData,
     });
@@ -140,7 +141,9 @@ $("btn-submit").addEventListener("click", async function (e) {
       body: formData,
     });
 
-    console.log(data);
+    const data = await res.json();
+
+    console.log(data.message);
   } catch (err) {
     console.log("Something when wrong");
   }
