@@ -1,0 +1,48 @@
+.card {
+  width: 280px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #1f2937;
+  display: flex;
+  gap: 16px;
+  margin: 10px;
+}
+.avatar,
+.line {
+  position: relative;
+  overflow: hidden;
+  background: #2d3748;
+}
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+}
+.line {
+  height: 12px;
+  border-radius: 6px;
+  margin: 6px 0;
+}
+.line.short {
+  width: 40%;
+}
+.line.medium {
+  width: 70%;
+}
+.line.long {
+  width: 95%;
+}
+.avatar::before,
+.line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, #4b5563, transparent);
+  animation: shimmer 1.4s infinite;
+  transform: translateX(-100%);
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
