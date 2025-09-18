@@ -1,46 +1,45 @@
-// skeleton.js
-
-// Function to create and show a skeleton loader
-function loading(targetId) {
+// Function to show loading skeletons
+function loading(targetId, count = 1) {
   const container = document.getElementById(targetId);
-
   if (!container) {
     console.error(`No element with id "${targetId}" found`);
     return;
   }
 
-  // Create wrapper
-  const card = document.createElement("div");
-  card.className = "card";
+  container.style.display = "flex";
+  container.style.flexDirection = "column";
+  container.style.gap = "20px";
 
-  // Avatar
-  const avatar = document.createElement("div");
-  avatar.className = "avatar";
-  card.appendChild(avatar);
+  // Clear old loaders
+  container.innerHTML = "";
 
-  // Lines container
-  const lines = document.createElement("div");
-  lines.style.flex = "1";
+  for (let i = 0; i < count; i++) {
+    const card = document.createElement("div");
+    card.className = "card";
 
-  // Lines
-  const lineShort = document.createElement("div");
-  lineShort.className = "line short";
-  const lineMedium = document.createElement("div");
-  lineMedium.className = "line medium";
-  const lineLong = document.createElement("div");
-  lineLong.className = "line long";
+    const avatar = document.createElement("div");
+    avatar.className = "avatar";
+    card.appendChild(avatar);
 
-  lines.appendChild(lineShort);
-  lines.appendChild(lineMedium);
-  lines.appendChild(lineLong);
+    const lines = document.createElement("div");
+    lines.className = "lines";
 
-  // Add to card
-  card.appendChild(lines);
+    ["short", "medium", "long"].forEach((type) => {
+      const line = document.createElement("div");
+      line.className = `line ${type}`;
+      lines.appendChild(line);
+    });
 
-  // Add card to target container
-  container.appendChild(card);
+    card.appendChild(lines);
+    container.appendChild(card);
+  }
 }
 
-function finishedLoad(id) {
-  document.getElementById(id).style.display = "none";
+// Function to remove the loader
+function finishedLoad(targetId) {
+  const container = document.getElementById(targetId);
+  if (container) {
+    container.innerHTML = "";
+    container.style.display = "none";
+  }
 }

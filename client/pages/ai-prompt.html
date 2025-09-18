@@ -3,24 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ai prompt</title>
+    <title>AI Prompt</title>
     <link href="../css/common/loading.css" rel="stylesheet" />
+    <link href="../css/ai-prompt.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="container" class="container"></div>
-    <div id="response" class="response"></div>
+    <div>
+      <!-- Response container -->
+      <div class="response" id="response"></div>
+      <div id="loading"></div>
 
-    <form id="form" method="post">
-      <input
-        id="input"
-        type="text"
-        name="input"
-        placeholder="Add task with ai"
-      />
+      <!-- Form -->
+      <form id="form" method="post">
+        <input
+          id="input"
+          type="text"
+          name="input"
+          placeholder="Add task with AI"
+        />
+        <button id="submit-btn" type="submit">Submit</button>
+      </form>
+    </div>
 
-      <button id="submit-btn" type="submit">submit</button>
-    </form>
-
+    <!-- JS files -->
     <script src="../js/common/loading.js"></script>
     <script src="../js/ai-prompt.js"></script>
   </body>
