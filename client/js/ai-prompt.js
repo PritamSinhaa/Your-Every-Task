@@ -21,12 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const res = await fetch(
-        "https://37fbbd990937.ngrok-free.app/api/generate",
+        "https://f71c4a79b4fc.ngrok-free.app/api/generate",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            model: "gemma3:1b",
+            model: "gemma3:4b",
             prompt: new FormData(form).get("input"),
             stream: false,
           }),
