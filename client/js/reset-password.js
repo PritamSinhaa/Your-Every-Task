@@ -32,27 +32,35 @@ $("btn-show-password").addEventListener("click", function () {
 
 //handle check new password and confirm password is mactch or not
 const checkMatch = () => {
-  if (password.newPassword.value !== password.confirmPassword.value) {
+  if (
+    password.newPassword.value !== password.confirmPassword.value &&
+    !password.confirmPassword.firstFocus
+  ) {
     password.passwordMatch = false;
     password.message = "Password is not match";
-  } else {
+  } else if (password.newPassword.value == password.confirmPassword.value) {
     password.passwordMatch = true;
     password.message = "";
   }
 };
+
+// Handling error
+function message() {
+  $("confirm-password-message").textContent = password.message;
+}
 
 // check new-password and confirm -password is match or not
 $("new-password").addEventListener("input", function () {
   password.newPassword.value = this.value;
 
   checkMatch();
-
-  console.log(password.message);
+  message();
 });
 
 $("confirm-password").addEventListener("input", function () {
   password.confirmPassword.value = this.value;
 
+  password.confirmPassword.firstFocus = false;
   checkMatch();
-  console.log(password.message);
+  message();
 });
