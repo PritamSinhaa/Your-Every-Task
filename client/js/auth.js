@@ -254,13 +254,13 @@ $("auth-form").addEventListener("submit", async function (e) {
   try {
     if (submitBtn === "signup") {
       // FIXME: change in real host
-      res = await fetch("http://localhost:3000/api/auth/sign-up", {
+      res = await fetch("http://localhost:3000/auth/sign-up", {
         method: "POST",
         body: formData,
       });
     } else if (submitBtn === "signin") {
       // FIXME: change in real host
-      res = await fetch("http://localhost:3000/api/auth/sign-in", {
+      res = await fetch("http://localhost:3000/auth/sign-in", {
         method: "POST",
         body: formData,
       });
