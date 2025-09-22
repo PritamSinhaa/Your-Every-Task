@@ -30,7 +30,6 @@ app.use(
 );
 
 app.use("", uplodad.none(), mainRoutes);
-app.use("/api", uplodad.none(), api);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
