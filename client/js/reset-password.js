@@ -30,19 +30,26 @@ $("btn-show-password").addEventListener("click", function () {
   );
 });
 
+const regixPassword = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
 //handle check new password and confirm password is mactch or not
 const checkMatch = () => {
-  if (
-    password.newPassword.value !== password.confirmPassword.value &&
-    !password.confirmPassword.firstFocus
-  ) {
-    password.passwordMatch = false;
-    password.message = "Password is not match";
-  } else if (password.newPassword.value == password.confirmPassword.value) {
-    password.passwordMatch = true;
-    password.message = "";
-  }
+  if (password.newPassword.value)
+    if (
+      password.newPassword.value !== password.confirmPassword.value &&
+      !password.confirmPassword.firstFocus
+    ) {
+      password.passwordMatch = false;
+      password.message = "Password is not match";
+      return;
+    } else if (password.newPassword.value == password.confirmPassword.value) {
+      password.passwordMatch = true;
+      password.message = "";
+      return;
+    }
 };
+
+// check valid password
 
 // Handling error
 function message() {
@@ -63,4 +70,26 @@ $("confirm-password").addEventListener("input", function () {
   password.confirmPassword.firstFocus = false;
   checkMatch();
   message();
+});
+
+// handling reset - form
+
+$("btn-submit").addEventListener("click", async function (e) {
+  e.preventDefault();
+
+  const form = $("form");
+
+  const formData = new FormData(form);
+
+  try {
+    // TODO: chnage this local host in real web
+    const res = await fetch("http://localhost:3000/api/auth/reset-password", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = res.json();
+
+    console.log(data);
+  } catch {}
 });
