@@ -88,7 +88,7 @@ $("btn-submit").addEventListener("click", async function (e) {
       body: formData,
     });
 
-    const data = res.json();
+    const data = await res.json();
 
     console.log(data);
   } catch {}
