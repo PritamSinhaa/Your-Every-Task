@@ -97,3 +97,10 @@ exports.signIn = async (req, res) => {
     });
   }
 };
+
+// Reset password
+exports.resetPassword = async (req, res) => {
+  try {
+    const { newPassword } = req.body;
+  } catch {}
+};

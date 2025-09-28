@@ -1,0 +1,31 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Prompt</title>
+    <link href="../css/common/loading.css" rel="stylesheet" />
+    <link href="../css/ai-prompt.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Response container -->
+      <div class="response" id="response"></div>
+      <div id="loading"></div>
+
+      <!-- Form -->
+      <form id="form" method="post">
+        <input
+          id="input"
+          type="text"
+          name="input"
+          placeholder="Add task with AI"
+        />
+        <button id="submit-btn" type="submit">Submit</button>
+      </form>
+    </div>
+
+    <!-- JS files -->
+    <script src="../js/common/loading.js"></script>
+    <script src="../js/ai-prompt.js"></script>
+  </body>
+</html>
