@@ -28,7 +28,7 @@ body {
   text-align: center;
   overflow-y: visible;
   margin-bottom: 1.2rem;
-  display: none;
+  display: flexs;
 }
 
 body {
