@@ -102,7 +102,5 @@ exports.signIn = async (req, res) => {
 exports.resetPassword = async (req, res) => {
   try {
     const { newPassword } = req.body;
-
-    console.log(newPassword);
   } catch {}
 };
